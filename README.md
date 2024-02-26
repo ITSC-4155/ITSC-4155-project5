@@ -8,7 +8,7 @@
 - Sanjana Bansal
 
 
-# Developer
+## Developers
 - Aaloki Patel
 - Ruthvika Kosuri
 - Lilian Camacho
