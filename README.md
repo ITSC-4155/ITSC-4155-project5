@@ -12,3 +12,5 @@
 - Aaloki Patel
 - Ruthvika Kosuri
 - Lilian Camacho
+- Jasmine Kingg
+- Sanjana Bansal
