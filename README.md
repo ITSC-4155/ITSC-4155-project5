@@ -1,6 +1,6 @@
 # ITSC-4155-project5
 
-## Group 4
+## Group 4 (Mosaic Music)
 ## Scrum Master
 - Jasmine Kingg
 
