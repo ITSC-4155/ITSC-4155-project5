@@ -1,14 +1,14 @@
 # ITSC-4155-project5
 
-# [Team Name]
-# Scrum Master
-# [Team Member 1]
+##[Team Name]
+## Scrum Master
+- Jasmine Kingg
 
-# Product Owner
-# [Team Member 2]
+## Product Owner
+- Sanjana Bansal
 
 
 # Developer
-# [Team Member 3]
-# [Team Member 4]
-# [Team Member 5]
+- Aaloki Patel
+- Ruthvika Kosuri
+- Lilian Camacho
