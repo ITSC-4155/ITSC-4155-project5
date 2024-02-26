@@ -1,6 +1,6 @@
 # ITSC-4155-project5
 
-##[Team Name]
+## Group 4
 ## Scrum Master
 - Jasmine Kingg
 
