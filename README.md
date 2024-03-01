@@ -14,3 +14,11 @@
 - Lilian Camacho
 - Jasmine Kingg
 - Sanjana Bansal
+
+
+# Instructions
+- clone repository
+- `pip install -r requirements.txt`
+- `cd mosaicmusic`
+- `python manage.py migrate` 
+- `python manage.py runserver` 
