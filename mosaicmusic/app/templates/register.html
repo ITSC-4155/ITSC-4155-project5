@@ -60,7 +60,13 @@
       <div class="d-flex justify-content-center">
         or <a class="text-warning px-1" href="/login"> Log in</a>
       </div>
-
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="/login">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
     </div>
   </div>
 </div>
