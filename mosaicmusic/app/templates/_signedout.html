@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block styles %}
+      {{ bootstrap.load_css() }}
+      {% endblock %}
+     
+      <script src="https://kit.fontawesome.com/6079d96043.js" crossorigin="anonymous"></script>
+     
+      
+      <title>{% block title%}MosaicMusic{% endblock title %}</title>
+      {% endblock %}
+    </head>
+<body>
+    <div class="w-100 h-100 bg-dark " > 
+      <div class="vh-100 d-flex flex-row">
+  <div class="col-4 bg-black py-4"><a class="navbar-brand m-4 " href="/"><img src="../static/images/mm_logo_small.png"></img></a></div>
+        <div class="col-8 text-light h-100 pb-4">
+        {% block content %}
+        {% endblock content%}
+    </div>
+  </div>
+    </div>
+    {% block scripts %}
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+</body>
+</html>
