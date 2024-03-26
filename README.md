@@ -63,7 +63,7 @@ https://www.postgresql.org/download/
 
 11. Click the login link, and redirect to the registration page.
 12. Fill out the information. If successful, you should see the information displayed in pgadmin under the table view.
-![step 5](https://imgur.com/lB4vHC8.png)
+![step 12](https://imgur.com/J12ojGm.png)
 ![Step 12](https://imgur.com/op9qSxG.png)
 
 
