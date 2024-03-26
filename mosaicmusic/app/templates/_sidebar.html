@@ -1,0 +1,48 @@
+<div class="flex-column " style="height: 100%;">
+    <div class="p-3 bg-black vh-100 " style="width: 250px; ">
+      
+      <ul class="list-unstyled ps-0">
+       {# {% if user.is_authenticated %}
+        <li class="mb-1 fs-4 flex-wrap"> Welcome, {{user.username}}!</li>
+        {% else %}
+        {% endif %}#}
+        <li class="mb-1">
+          <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+            Library 🞛
+          </button>
+          <div class="collapse show " id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-4">
+              <li><a href="#" class="link-light rounded">Liked Songs</a></li>
+              <li><a href="#" class="link-light rounded">Recently Played</a></li>
+    
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            Playlists 🞛
+          </button>
+          <div class="collapse" id="dashboard-collapse">
+            <ul class="btn-toggle-nav list-unstyled  fw-normal pb-1 small px-4">
+              <li class=""><a href="#" class="link-light rounded">[playlist]</a></li>
+    
+            </ul>
+          </div>
+        </li>
+       
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+          <button class="btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            Account
+          </button>
+          <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" class="link-dark rounded">Profile</a></li>
+              <li><a href="#" class="link-dark rounded">Settings</a></li>
+              <li><a href="#" class="link-dark rounded">Sign out</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    </div>
