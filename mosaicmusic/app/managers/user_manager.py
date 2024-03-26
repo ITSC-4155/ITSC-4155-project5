@@ -1,9 +1,11 @@
-from .models import db, User
+from ..models import db, User
 
-class UserRepository:
+# Repository for manipulating User data
+
+class UserManager:
     def create_user(self, email, username, password):
         new_user = User(email, username, password)
         return new_user
     
 
-user_repository_singleton = UserRepository()
+user_manager_class = UserManager()

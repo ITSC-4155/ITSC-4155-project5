@@ -17,7 +17,7 @@
     {% endblock %}
   </head>
 <body>
-    <div class="w-100 h-100 bg-dark " > 
+    <div class="w-100 h-100 bg-dark overflow-hidden" > 
         <nav class="navbar  navbar-expand-lg" style="background-color: #90742C;">
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,20 +38,28 @@
             </ul>
             <div class="col-1">
             <div class=" nav-item dropdown ">
+              {% if username != None %}
                 <button class=" btn btn-dark rounded-pill dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-                {# {% if user.is_authenticated %}
-                 {{user.username}}
-                 {% else %}
-                 User
-                 {% endif %} #}
+                
+                 {{username}}
+              
                   
                 </button>
                 <ul class="dropdown-menu bg-dark ">
                     <li><a class="dropdown-item text-light" href="/profiles">Profile</a></li>
                   <li><a class="dropdown-item text-light" href="/settings">User Settings</a></li>
                     <hr class="border m-1">
-                  <li><a class="dropdown-item text-light" href="/login">Logout</a></li>
+                  <li><a class="dropdown-item text-light" href="/logout">Logout</a></li>
                 </ul>
+
+                {% else %}
+                <a class=" btn  btn-dark rounded-pill "  href="/login">
+                
+                  Log in
+               
+                   
+                </a>
+                {% endif %} 
               </div>
               </div>
             </div>

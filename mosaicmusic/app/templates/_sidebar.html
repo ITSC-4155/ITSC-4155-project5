@@ -2,10 +2,9 @@
     <div class="p-3 bg-black vh-100 " style="width: 250px; ">
       
       <ul class="list-unstyled ps-0">
-       {# {% if user.is_authenticated %}
-        <li class="mb-1 fs-4 flex-wrap"> Welcome, {{user.username}}!</li>
-        {% else %}
-        {% endif %}#}
+       {% if username != None %}
+        <li class="mb-1 fs-4 flex-wrap"> Welcome, {{username}}!</li>
+
         <li class="mb-1">
           <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
             Library 🞛
@@ -43,6 +42,11 @@
             </ul>
           </div>
         </li>
+
+        {% else %}
+        <li class="mb-1 fs-5 flex-wrap"> Please <a class="text-warning" href="/login">Log In</a> to view</li>
+        
+        {% endif %}
       </ul>
     </div>
     </div>
