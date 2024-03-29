@@ -1,0 +1,69 @@
+{% extends "_base.html" %}
+
+
+{%block content%}
+<div class="vh-100">
+<div class="p-4"> <h1 class="fw-bold">User & Account Settings</h1></div>
+<div class="px-4 fw-bold d-flex flex-column"> 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class=" text-center bg-success p-2 mb-3 rounded">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+  {% endwith %}
+    <h5>Edit Account Info</h5>
+    <form class="col" action="/my/account" method="post">
+        <div class="col-4 px-2">
+            <label class="p-1" for="email">Edit Email</label>
+            <input 
+            name="email"
+            type="text"
+            class="form-control bg-secondary border-black "
+            id="username"
+            placeholder="{{current_user.email}}"
+            required
+        ></input>
+        </div>
+        <div class="d-flex flex-row">
+    <div class="col-2 px-2">
+        <label class="p-1" for="username">Edit Username</label>
+        <input 
+        name="username"
+        type="text"
+        class="form-control bg-secondary border-black "
+        id="username"
+        placeholder="{{current_user.username}}"
+        required
+    ></input>
+</div>
+
+<div class="col-2">
+    <label class="p-1" for="password">Edit Password</label>
+    <input 
+    name="password"
+    type="password"
+    class="form-control bg-secondary border-black "
+    id="password"
+    placeholder="<secret>"
+    required
+></input>
+</div>
+</div>
+<button
+type="submit"
+class="rounded-pill m-3 btn col-2 mx-auto"
+style="background-color: #90742C;"
+
+>
+Update
+</button>
+    </form>
+<hr>
+
+<form method="post" action="/my/account/delete" class="w-100 d-flex justify-content-end"><button type="submit" class=" btn btn-outline-danger border-2 rounded-pill"><i class="fa-solid fa-trash"></i> Delete Account</button></form>    
+</div>
+
+</div>
+    
+{%endblock content%}

@@ -2,11 +2,13 @@ from ..models import db, User
 from flask_bcrypt import Bcrypt
 from ..managers.user_manager import user_manager_class
 from flask_login import login_user, login_required, current_user,logout_user
-
+import deezer
 from flask import (
     Blueprint, flash, redirect, render_template, request
 )
 
+
+client = deezer.Client(app_id='foo', app_secret='bar')
 bcrypt = Bcrypt()
 auth_pages = Blueprint('auth', __name__, template_folder="templates", url_prefix='')
 
@@ -16,11 +18,9 @@ auth_pages = Blueprint('auth', __name__, template_folder="templates", url_prefix
 # HOME PAGE ACCESS
 @auth_pages.route('/')
 def home():
-    if current_user.is_authenticated == True:
-        user = current_user.username
-    else:
-        user = None
-    return render_template('index.html', username=user)
+
+
+    return render_template('index.html', current_user=current_user)
 
 
 ## REGISTER PAGES

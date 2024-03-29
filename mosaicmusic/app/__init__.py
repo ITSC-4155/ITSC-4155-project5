@@ -1,16 +1,15 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from config import Config
-
-#from .routerzz import home_pages, bcrypt
-from .routers import auth_routers
-
+from deezer import Client
+from .routers import auth_routers, user_routers, profile_routers
 from .models import db, User
 from flask_login import LoginManager
 
 
-
+client = Client()
 login_manager = LoginManager()
+
 
 
 # Initializing the app and plugins
@@ -23,11 +22,15 @@ login_manager.init_app(app)
 
   
 login_manager.login_view = 'auth.login'
+
+
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(id):
     # since the user_id is just the primary key of our user table, use it in the query for the user
-    return User.query.get(str(user_id)) 
+    return User.query.get(id) 
 
 
 app.register_blueprint(auth_routers.auth_pages)
+app.register_blueprint(user_routers.user_pages)
+app.register_blueprint(profile_routers.profile_pages)
 
