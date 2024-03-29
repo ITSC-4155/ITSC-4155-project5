@@ -72,3 +72,8 @@ https://www.postgresql.org/download/
 ![step 13](https://imgur.com/snjASNP.png)
 
 You did it!
+
+
+## 14. Visit account under the user drop down in the navbar to edit or delete your account information
+
+![step 14](https://imgur.com/rfS8kON.png) 
