@@ -4,9 +4,9 @@ id SERIAL NOT NULL ,
 email VARCHAR(255) NOT NULL,
 username VARCHAR(30) NOT NULL,
 "password" VARCHAR(255) NOT NULL,
-profile_picture VARCHAR(255),
-about VARCHAR(255),
-PRIMARY KEY(id)
+profile_picture VARCHAR(255) NULL,
+about VARCHAR(255) NULL,
+PRIMARY KEY (id)
 );
 
 -- CREATE TABLE IF NOT EXISTS playlists(
