@@ -1,17 +1,28 @@
-{% extends "_base.html" %}
+{% extends "_base.html" %} {%block content%}
 
+<div class="d-flex flex-row">
+  {%include "_sidebar.html"%}
 
-{%block content%}
+  <div class="p-4">
+    <h1 class="fw-bold">Home</h1>
 
-<div class="d-flex flex-row">{%include "_sidebar.html"%}
+    <div class="m-4 vw-100 col">
+      <h4 class="p-2 fw-bold">Trending Albums</h4>
 
-<div class="p-4">  <h1 class="fw-bold">Home</h1>
-
-    {# TODO: HOME CONTENT #}
-<p></p>
+      <div
+        class="card d-flex flex-row bg-black col-sm-2 border"
+        style="height: 120px"
+      >
+        <div class="bg-secondary rounded" style="width: 120px"></div>
+        <div class="p-2 text-white d-flex flex-column">
+          <div class="">Album Name</div>
+          <div>Artist</div>
+          <div class="text-secondary">release date</div>
+        </div>
+      </div>
+    </div>
+    <p></p>
+  </div>
 </div>
-</div>
-
-
 
 {%endblock content%}
