@@ -19,8 +19,9 @@ auth_pages = Blueprint('auth', __name__, template_folder="templates", url_prefix
 @auth_pages.route('/')
 def home():
 
+    chart = client.get_chart
 
-    return render_template('index.html', current_user=current_user)
+    return render_template('index.html', current_user=current_user, chart=chart)
 
 
 ## REGISTER PAGES
