@@ -20,7 +20,8 @@ auth_pages = Blueprint('auth', __name__, template_folder="templates", url_prefix
 def home():
 
     albums = client.get_albums_chart(0)
-    return render_template('index.html', current_user=current_user, albums=albums)
+    artists = client.get_artists_chart(0)
+    return render_template('index.html', current_user=current_user, albums=albums, artists=artists)
 
 
 ## REGISTER PAGES
