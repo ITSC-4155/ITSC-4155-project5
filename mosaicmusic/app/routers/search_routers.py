@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template
 
-search_blueprint = Blueprint('search', __name__)
+search_blueprint = Blueprint('search', __name__,template_folder="templates", )
 
 @search_blueprint.route('/', methods=['GET'])  
 def search():
