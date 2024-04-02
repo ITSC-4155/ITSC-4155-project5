@@ -29,11 +29,13 @@
 
                     <li class="nav-item">
                  
-               
-                <form class="d-flex " role="search">
-                  <input class="form-control me-2 bg-dark border-0 rounded-pill" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn " type="submit">  <i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
+                      <form class="d-flex" role="search" action="{{ url_for('search.search') }}" method="get">
+                        <input class="form-control me-2 bg-dark border-0 rounded-pill text-white" type="search" name="query" placeholder="Search" aria-label="Search">
+                        <button class="btn" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
                     </li>
             </ul>
             <div class="col-1">
