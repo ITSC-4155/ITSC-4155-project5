@@ -6,20 +6,28 @@
   <div class="p-4">
     <h1 class="fw-bold">Home</h1>
 
-    <div class="m-4 vw-100 col">
+    <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
+<div class="d-flex flex-row overflow-x-auto" style="width: 1000px;">
+  <!-- render albums from the API chart list  -->
+{% for album in albums %}
 
-      <div
-        class="card d-flex flex-row bg-black col-sm-2 border"
-        style="height: 120px"
+<div
+        class="card d-flex flex-row bg-black col-sm-2 border m-2"
+        style="height: 120px; width:250px"
       >
-        <div class="bg-secondary rounded" style="width: 120px"></div>
+        <div class="rounded" ><img class="contain rounded  border-end" style="width: 118px" src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg"></img></div>
         <div class="p-2 text-white d-flex flex-column">
-          <div class="">Album Name</div>
-          <div>Artist</div>
-          <div class="text-secondary">release date</div>
+          <div class="bold"><a href="/api/album/{{album.id}}">{{album.title |truncate(15,'...')}}</a></div>
+          <div>{{album.artist.name}}</div>
+          <div class="text-secondary">{{album.release_date}}</div>
         </div>
       </div>
+
+{% endfor %}
+
+</div>
+      
     </div>
     <p></p>
   </div>
