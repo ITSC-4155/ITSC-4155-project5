@@ -6,22 +6,49 @@
   <div class="p-4">
     <h1 class="fw-bold">Home</h1>
 
-    <div class="m-4 vw-100 col">
+    <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
+      <div class="d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1000px;">
+        <!-- render albums from the API chart list  -->
+        {% for album in albums %}
 
-      <div
-        class="card d-flex flex-row bg-black col-sm-2 border"
-        style="height: 120px"
-      >
-        <div class="bg-secondary rounded" style="width: 120px"></div>
-        <div class="p-2 text-white d-flex flex-column">
-          <div class="">Album Name</div>
-          <div>Artist</div>
-          <div class="text-secondary">release date</div>
+        <div class="card d-flex flex-row bg-black col-sm-2 border m-2" style="height: 120px; width:260px">
+          <div class="rounded"><img class="contain rounded  border-end" style="width: 118px"
+              src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg"></img>
+          </div>
+          <div class="p-2 text-white d-flex flex-column justify-content-between">
+            <div class="fw-bold "><a class="link-light link-opacity-50-hover text-decoration-none "
+                href="/api/album/{{album.id}}">{{album.title |truncate(15,'...')}}</a></div>
+            <div class="fw-light "><a class="link-warning link-opacity-50-hover text-decoration-none"
+                href="/api/artist/{{album.artist.id }}"
+                style="font-size: medium;">{{album.artist.name|truncate(13,'...')}}</a></div>
+            <div class="text-secondary">{{album.release_date}}</div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+    <div class="m-4 w-100 col">
+      <h4 class="p-2 fw-bold">Trending Artists</h4>
+    <div class="d-flex flex-row overflow-x-auto" style="width: 1000px; height: 225px;">
+{% for artist in artists[:8] %}
+<div class="d-flex flex-column text-center">
+      <div class="p-4" >
+        <div class="bg-secondary border rounded overflow-hidden"
+          style="height: 125px; width: 125px; transform: rotate(45deg);">
+          <div class="" style="transform: rotate(-45deg);"><img class="pb-5  mb-5 "
+              src="{{artist.picture_medium}}" />
+          </div>
         </div>
       </div>
+<a class="link-warning link-opacity-50-hover text-decoration-none" href="api/artist/{{artist.id}}">{{artist.name}}</a>
     </div>
-    <p></p>
+      {%endfor %}
+    </div>
+  </div>
   </div>
 </div>
 
