@@ -18,3 +18,12 @@ def showAlbum(id):
 
     album = client.get_album(id)
     return render_template('album.html', album=album)
+
+
+## Get an artist page by ID
+@api_pages.get('/artist/<int:id>')
+def showArtist(id):
+
+    artist = client.get_artist(id)
+    toptracks = client.get_artist(id).get_top()
+    return render_template('artist.html', artist=artist, toptracks=toptracks)

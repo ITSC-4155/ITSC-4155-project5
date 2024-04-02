@@ -8,18 +8,18 @@
 
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
-<div class="d-flex flex-row overflow-x-auto" style="width: 1000px;">
+<div class="d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1000px;">
   <!-- render albums from the API chart list  -->
 {% for album in albums %}
 
 <div
         class="card d-flex flex-row bg-black col-sm-2 border m-2"
-        style="height: 120px; width:250px"
+        style="height: 120px; width:260px"
       >
         <div class="rounded" ><img class="contain rounded  border-end" style="width: 118px" src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg"></img></div>
-        <div class="p-2 text-white d-flex flex-column">
-          <div class="bold"><a href="/api/album/{{album.id}}">{{album.title |truncate(15,'...')}}</a></div>
-          <div>{{album.artist.name}}</div>
+        <div class="p-2 text-white d-flex flex-column justify-content-between">
+          <div class="fw-bold "><a class="link-light link-opacity-50-hover text-decoration-none " href="/api/album/{{album.id}}" >{{album.title |truncate(15,'...')}}</a></div>
+          <div class="fw-light "><a class="link-warning link-opacity-50-hover text-decoration-none"  href="/api/artist/{{album.artist.id }}" style="font-size: medium;" >{{album.artist.name|truncate(13,'...')}}</a></div>
           <div class="text-secondary">{{album.release_date}}</div>
         </div>
       </div>
