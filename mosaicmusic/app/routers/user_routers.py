@@ -20,6 +20,7 @@ def account():
  return render_template('account.html', current_user=current_user)
 
 
+
 @user_pages.post('/account')
 def update_user():
     email = request.form.get('email')
