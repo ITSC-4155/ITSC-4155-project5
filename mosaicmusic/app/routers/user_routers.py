@@ -47,6 +47,6 @@ def delete_user():
 
 @user_pages.route('/likes')
 def likes():
-   
+    
     return render_template('likes.html', current_user=current_user)
 
