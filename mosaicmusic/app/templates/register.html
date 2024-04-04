@@ -1,0 +1,75 @@
+{% extends "_signedout.html" %} 
+
+{%block content%}
+<div class="container">
+  <div class="mx-auto w-75 vh-100 d-flex align-items-center p-3">
+    <div class="w-75">
+        <h2 class="fw-bold p-2">Register</h2>
+
+    
+    <div class="card text-light bg-black p-5 border w-100">
+        
+      <div class="d-flex justify-content-center">
+        <form  method="POST" action="/register" class="w-75">
+     
+          <label class="fw-bold pb-1" for="email">Email Address</label><br />
+          <input
+            name="email"
+            type="text"
+            class="form-control mb-3 "
+            id="email"
+            placeholder="Enter email"
+            required
+          />
+
+          <label class="fw-bold pb-1" for="username">Create Username</label>
+          <input
+            name="username"
+            type="text"
+            class="form-control mb-3"
+            id="username"
+            placeholder="Enter username"
+            required
+          />
+          <label class="fw-bold pb-1" for="password">Create Password</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control "
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+          <!-- <label class="fw-bold pb-1" for="password">Re-Enter Password</label>
+          <input
+            type="password"
+            class="form-control mb-3"
+            id="password"
+            placeholder="Enter password"
+            required
+          /> -->
+          <button
+            type="submit"
+            class="rounded-pill m-3 btn btn-warning w-100"
+            value="register"
+          >
+            Register Account
+          </button>
+        </form>
+      </div>
+      <div class="d-flex justify-content-center">
+        or <a class="text-warning px-1" href="/login"> Log in</a>
+      </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="/login">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+  </div>
+</div>
+</div>
+
+{%endblock content%}

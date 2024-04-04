@@ -1,0 +1,104 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="d-flex flex-row">
+    {% include "_sidebar.html" %}
+    <div>
+
+        <div class="p-4 vw-100 bg-black">
+            <h1 class="fw-bold text-white">Liked Songs</h1>
+        </div>
+        <div class="p-4">
+
+       
+            <div class="title-details">
+                <p class="title" style="display: inline-block; margin-left: 150px; margin-right:500px">TITLE</p>
+                <p class="album" style="display: inline-block; margin-right: 500px; ">ALBUM</p>
+                <p class="duration" style="display: inline-block;">DURATION</p>
+            </div>
+            <hr style="margin-top: 5px; margin-bottom: 5px;">
+            <div class="song-list">
+                <div class="song">
+                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
+                <div class="song-details">
+                    <h5 class="song-title">Song name</h5>
+                        <p class="song-artist">artist</p>
+                    </div>
+                    <p class="song-album">album name</p>
+                    <p class="song-duration">1:23</p>
+                </div>
+                <hr>
+            <div class="song">
+                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
+                <div class="song-details">
+                    <h5 class="song-title">Song name</h5>
+                        <p class="song-artist">artist</p>
+                </div>
+                    <p class="song-album">album name</p>
+                    <p class="song-duration">1:23</p>
+                </div>
+            </div>
+            <hr>
+            <div class="song">
+                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
+                <div class="song-details">
+                    <h5 class="song-title">Song name</h5>
+                        <p class="song-artist">artist</p>
+                    </div>
+                    <p class="song-album">album name</p>
+                    <p class="song-duration">1:23</p>
+                </div>
+                <hr>
+                <div class="song">
+                    <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
+                    <div class="song-details">
+                        <h5 class="song-title">Song name</h5>
+                            <p class="song-artist">artist</p>
+                        </div>
+                        <p class="song-album">album name</p>
+                        <p class="song-duration">1:23</p>
+                    </div>
+                    <hr>
+                    
+
+
+        </div>
+    </div>
+</div>
+<style>
+    .song {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; /* Add some margin between each song */
+    }
+    
+    .song img {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
+    }
+    
+    .song-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .song-details h3,
+    .song-details p {
+        margin: 0; 
+    }
+    
+    .song-details p {
+        margin-bottom: 5px;
+    }
+    
+    .song-album,
+    .song-duration {
+        margin-right: 40px;
+        margin-left: 460px;
+    }
+</style>
+
+
+{% endblock content %}
