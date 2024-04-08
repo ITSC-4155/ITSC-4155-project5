@@ -9,6 +9,40 @@ about VARCHAR(255) NULL,
 PRIMARY KEY(id)
 );
 
+
+CREATE TABLE IF NOT EXISTS tracks(
+track_id SERIAL NOT NULL,
+title VARCHAR(300) NOT NULL,
+duration INT NOT NULL,
+is_explicit BOOLEAN NOT NULL,
+audio_preview VARCHAR(300) NOT NULL,
+release_date DATE NOT NULL,
+md5_image VARCHAR(300) NOT NULL,
+track_position INT NOT NULL,
+artist_id INT NOT NULL,
+album_id INT NOT NULL,
+album_name VARCHAR(300) NOT NULL
+PRIMARY KEY(track_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS likes (
+    likes_id SERIAL NOT NULL,
+    id INT NOT NULL,
+    PRIMARY KEY (likes_id),
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE 
+);
+
+
+
+CREATE TABLE IF NOT EXISTS likes_tracklist(
+	track_id INT,
+	likes_id INT,
+    PRIMARY KEY (track_id, likes_id),
+    FOREIGN KEY (track_id) REFERENCES tracks(track_id) ON DELETE CASCADE,
+    FOREIGN KEY (likes_id) REFERENCES likes(likes_id) ON DELETE CASCADE
+);
+
 -- CREATE TABLE IF NOT EXISTS playlists(
 -- playlist_id SERIAL NOT NULL,
 -- title VARCHAR(300) NOT NULL,
