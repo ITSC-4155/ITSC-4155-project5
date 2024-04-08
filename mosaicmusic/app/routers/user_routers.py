@@ -1,6 +1,10 @@
-from ..models import db, User
+from ..models import db, User, Likes
 from flask_bcrypt import Bcrypt
 from ..managers.user_manager import user_manager_class
+from ..managers.likes_manager import likes_manager_class
+from ..managers.track_manager import track_manager_class
+
+
 from flask_login import login_user, login_required, current_user,logout_user
 
 from flask import (
@@ -47,6 +51,19 @@ def delete_user():
 
 @user_pages.route('/likes')
 def likes():
-   
-    return render_template('likes.html', current_user=current_user)
+    
+    likes = Likes.query.filter_by(id=current_user.id).first()
+
+    if not likes:
+        likes_id = current_user.id
+        id = current_user.id
+        new_user_likes = likes_manager_class.create_user_likes(likes_id, id)
+        db.session.add(new_user_likes)
+        db.session.commit()
+
+    mylikes = likes.tracks
+
+    
+
+    return render_template('likes.html', current_user=current_user, likes=mylikes)
 

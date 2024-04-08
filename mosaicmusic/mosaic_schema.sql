@@ -11,7 +11,7 @@ PRIMARY KEY(id)
 
 
 CREATE TABLE IF NOT EXISTS tracks(
-track_id SERIAL NOT NULL,
+track_id BIGINT NOT NULL,
 title VARCHAR(300) NOT NULL,
 duration INT NOT NULL,
 is_explicit BOOLEAN NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS likes (
 
 
 CREATE TABLE IF NOT EXISTS likes_tracklist(
-	track_id INT,
+	track_id BIGINT,
 	likes_id INT,
     PRIMARY KEY (track_id, likes_id),
     FOREIGN KEY (track_id) REFERENCES tracks(track_id) ON DELETE CASCADE,

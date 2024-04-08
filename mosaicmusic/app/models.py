@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
 class Track(db.Model):
     __tablename__ = 'tracks'
 
-    track_id = db.Column(db.Integer, primary_key=True)
+    track_id = db.Column(db.BigInteger, primary_key=True)
     title = db.Column(db.String, primary_key=False)
     duration = db.Column(db.Integer, primary_key=False)
     is_explicit = db.Column(db.Boolean, primary_key=False)
@@ -33,8 +33,8 @@ class Track(db.Model):
     release_date = db.Column(db.DateTime, primary_key=False)
     md5_image = db.Column(db.String, primary_key=False)
     track_position = db.Column(db.String, primary_key=False)
-    artist_id = db.Column(db.Integer, primary_key=False)
-    album_id = db.Column(db.Integer, primary_key=False)
+    artist_id = db.Column(db.BigInteger, primary_key=False)
+    album_id = db.Column(db.BigInteger, primary_key=False)
     album_name = db.Column(db.String, primary_key=False)
 
     def __init__ \
@@ -52,21 +52,25 @@ class Track(db.Model):
         self.album_id = album_id
         self.album_name = album_name       
 
+
+likes_tracklist = db.Table(
+'likes_tracklist',
+db.Column('likes_id', db.Integer,\
+          db.ForeignKey('likes.likes_id', ondelete='CASCADE'), primary_key=True),
+db.Column('track_id', db.BigInteger,\
+          db.ForeignKey('tracks.track_id', ondelete='CASCADE'), primary_key=True),
+)
+
+
 class Likes(db.Model):
     __tablename__ = 'likes'
 
     likes_id = db.Column (db.Integer, primary_key=True)
     id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    tracks = db.relationship('Track', secondary=likes_tracklist, backref='likes', passive_deletes=True)
 
     def __init__ \
     (self, likes_id, id) -> None:
         self.likes_id = likes_id
         self.id = id
 
-likes_tracklist = db.Table(
-'likes_tracklist',
-db.Column('likes_id', db.Integer,\
-          db.ForeignKey('likes.likes_id', ondelete='CASCADE'), primary_key=True),
-db.Column('track_id', db.Integer,\
-          db.ForeignKey('tracks.track_id', ondelete='CASCADE'), primary_key=True),
-)

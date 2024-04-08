@@ -1,5 +1,10 @@
 from ..managers.user_manager import user_manager_class
 from ..managers.track_manager import track_manager_class
+from ..managers.likes_manager import likes_manager_class
+
+from ..models import db, User, Track
+from flask_login import current_user
+
 
 from flask import (
     Blueprint, flash, redirect, render_template, request
@@ -21,12 +26,14 @@ def showAlbum(id):
     album = client.get_album(id)
     return render_template('album.html', album=album)
 
-@api_pages.post('/album/<int:id>/<int:trackId>/like/')
-def likeTrack(trackId):
 
-    track = client.get_track(trackId)
 
-    track_id = track.id
+
+@api_pages.post('/track/<int:track_id>/like/')
+def likeTrack(track_id):
+    track = client.get_track(track_id)
+
+    track_id = track_id
     title = track.title
     duration = track.duration
     is_explicit = track.explicit_lyrics
@@ -38,10 +45,19 @@ def likeTrack(trackId):
     album_id = track.album.id
     album_name = track.album.title
 
-    track_manager_class.add_track(track_id, title, duration, is_explicit, audio_preview,\
-      release_date, md5_image, track_position,artist_id, album_id, album_name)
+    track = Track.query.filter_by(track_id=track_id).first()
+    
+    if not track:
+        track = track_manager_class.add_track(track_id, title, duration, is_explicit, audio_preview,\
+        release_date, md5_image, track_position,artist_id, album_id, album_name) 
+        db.session.add(track)
+        db.session.commit()
 
-    return redirect('/album/'+ track.album.id)
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
+    likes.tracks.append(track)
+    db.session.commit()
+
+    return redirect(f'/api/album/{album_id}')
     
 ## Get an artist page by ID
 @api_pages.get('/artist/<int:id>')
