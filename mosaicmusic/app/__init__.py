@@ -2,9 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap5
 from config import Config
 from deezer import Client
-
 from .routers import auth_routers, user_routers, profile_routers, search_routers, api_routers
-
 from .models import db, User
 from flask_login import LoginManager
 

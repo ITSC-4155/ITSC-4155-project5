@@ -75,7 +75,7 @@ def unlikeTrack(track_id):
     likes.tracks.remove(gettrack)
 
     db.session.commit()
-    return redirect(url_for('unlikeTrack'))
+    return redirect(f'/api/album/{track.album.id}')
 
 
 
