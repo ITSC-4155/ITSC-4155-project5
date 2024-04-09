@@ -48,6 +48,8 @@ def register_post():
     # generate password hash 
     hashed_password = bcrypt.generate_password_hash(password).decode()
 
+
+
     # Create new user in database
     new_user = user_manager_class.create_user(email, username, hashed_password)
     db.session.add(new_user)
