@@ -1,5 +1,5 @@
 from ..managers.user_manager import user_manager_class
-from ..managers.track_manager import track_manager_class
+from ..managers.track_manager import track_manager_class, duration
 from ..managers.likes_manager import likes_manager_class
 
 from ..models import db, User, Track
@@ -7,7 +7,7 @@ from flask_login import current_user
 
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request
+    Blueprint, flash, redirect, render_template, request, url_for
 )
 import deezer
 
@@ -24,7 +24,11 @@ api_pages = Blueprint('api', __name__, template_folder="templates", url_prefix='
 def showAlbum(id):
 
     album = client.get_album(id)
-    return render_template('album.html', album=album)
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
+    mylikes = likes.tracks
+  
+       
+    return render_template('album.html', album=album, likes = mylikes)
 
 
 
@@ -55,10 +59,26 @@ def likeTrack(track_id):
 
     likes = likes_manager_class.get_likes_by_id(current_user.id)
     likes.tracks.append(track)
+
     db.session.commit()
 
+
     return redirect(f'/api/album/{album_id}')
-    
+
+@api_pages.post('/track/<int:track_id>/unlike/')
+def unlikeTrack(track_id):
+
+    track = client.get_track(track_id)
+
+    gettrack = Track.query.filter_by(track_id=track_id).first()  
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
+    likes.tracks.remove(gettrack)
+
+    db.session.commit()
+    return redirect(url_for('unlikeTrack'))
+
+
+
 ## Get an artist page by ID
 @api_pages.get('/artist/<int:id>')
 def showArtist(id):

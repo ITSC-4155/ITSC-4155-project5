@@ -18,9 +18,10 @@
     <div class="p-4">
         <div class="row text-uppercase" style="font-size: small; color: #818283;">
             <div class="col-1 text-center">#</div>
-            <div class="col-5"> title</div>
-            <div class="col-3">extra</div>
-            <div class="col-2">duration</div>    
+            <div class="col-4"> title</div>
+            <div class="col-3">album</div>
+            <div class="col-2">Extra</div>
+            <div class="col-1">duration</div>    
         </div>
       <hr class="my-1">
 <div class=" overflow-y-auto overflow-x-hidden" style="height: 410px;">
@@ -30,8 +31,8 @@
 
 
       <div class="row d-flex align-items-center ">
-    
-        <div class="col-5"><div class="fw-bold">{{track.title}}</div>
+        <div class="col-1 text-center">{{track.track_position}}</div>
+        <div class="col-4"><div class="fw-bold">{{track.title}}</div>
             <div class="flex flex-row fw-light"> 
                 {% for contributor in track.contributors %}
                 {% if contributor == track.contributors|last %}
@@ -43,18 +44,21 @@
             </div>
         </div>
 
-        <div class="col-2">
-            <div class="flex flex-row mx-5">...</div>
+        <div class="col-3">
+            <div class="flex flex-row mx-0">{{track.album_name}}</div>
         </div>
-        <div class="col-1">
-          <div class="flex flex-row mx-5">
-            <form method="post" action="/api/track/{{track.id}}/like">
-            <button type="submit" class="btn btn-warning">like</button>
-          </form>
+        <div class="col-2">
+          <div class="flex flex-row ">
+            <form method="post" action="/api/track/{{track.track_id}}/unlike">
+              <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
+            </form>
         </div>
       </div>
-        <div class="col-2"> {{track.duration}}</div>  
-        <hr class="w-75 mx-auto my-2">
+        <div class="col-1"> {% set seconds = track.duration %}
+          {% set minutes = seconds // 60 %} 
+          {% set sec = seconds % 60 %}
+      {{"%01d:%02d" % (minutes, sec)}}</div>  
+        <hr class=" mx-auto my-2">
       </div>
 
       {% endfor %}

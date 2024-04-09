@@ -52,7 +52,8 @@ def delete_user():
 @user_pages.route('/likes')
 def likes():
     
-    likes = Likes.query.filter_by(id=current_user.id).first()
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
+   
 
     if not likes:
         likes_id = current_user.id
@@ -63,7 +64,7 @@ def likes():
 
     mylikes = likes.tracks
 
-    
+ 
 
     return render_template('likes.html', current_user=current_user, likes=mylikes)
 

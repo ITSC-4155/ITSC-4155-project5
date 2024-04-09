@@ -10,8 +10,10 @@ class LikesManager:
         get_likes = Likes.query.get(id)
         return get_likes
 
-    def get_likes_tracklist_by_id(self, id):
+    def get_l_tracklist_by_id(self, id):
         get_tracklist = Likes.query.filter_by(id = id).all()
         return get_tracklist
+    
+   
 
 likes_manager_class = LikesManager()
