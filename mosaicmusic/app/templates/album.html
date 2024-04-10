@@ -30,7 +30,11 @@
 
       <div class="row d-flex align-items-center ">
         <div class="col-1 text-center">{{track.track_position}}</div>
-        <div class="col-5"><div class="fw-bold">{{track.title}}</div>
+        <div class="col-5"><div class="fw-bold">{{track.title}}
+          {% if track.explicit_lyrics == True%}
+          <p class="badge m-0 text-danger">E</p> 
+         {% endif %}
+        </div>
             <div class="flex flex-row fw-light"> 
                 {% for contributor in track.contributors %}
                 {% if contributor == track.contributors|last %}
