@@ -10,6 +10,35 @@ PRIMARY KEY(id)
 );
 
 
+
+
+CREATE TABLE IF NOT EXISTS artists(
+  artist_id BIGINT NOT NULL,
+  "name" VARCHAR(200) NOT NULL,
+  picture VARCHAR(300) NULL,
+  fans INT NULL,
+  PRIMARY KEY(artist_id)
+);
+
+
+
+CREATE TABLE IF NOT EXISTS albums(
+  album_id BIGINT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  duration INT NOT NULL,
+  num_tracks INT NOT NULL,
+  is_explicit BOOLEAN NOT NULL,
+  release_date DATE NOT NULL,
+  record_type VARCHAR(255) NOT NULL,
+  artist_id BIGINT NOT NULL,
+PRIMARY KEY(album_id),
+FOREIGN KEY(artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
+);
+
+
+
+
+
 CREATE TABLE IF NOT EXISTS tracks(
 track_id BIGINT NOT NULL,
 title VARCHAR(300) NOT NULL,
@@ -19,11 +48,13 @@ audio_preview VARCHAR(300) NOT NULL,
 release_date DATE NOT NULL,
 md5_image VARCHAR(300) NOT NULL,
 track_position INT NOT NULL,
-artist_id INT NOT NULL,
-album_id INT NOT NULL,
-album_name VARCHAR(300) NOT NULL
-PRIMARY KEY(track_id)
+artist_id BIGINT NOT NULL,
+album_id BIGINT NOT NULL,
+PRIMARY KEY(track_id),
+FOREIGN KEY(artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE,
+FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE
 );
+
 
 
 CREATE TABLE IF NOT EXISTS likes (
@@ -42,6 +73,27 @@ CREATE TABLE IF NOT EXISTS likes_tracklist(
     FOREIGN KEY (track_id) REFERENCES tracks(track_id) ON DELETE CASCADE,
     FOREIGN KEY (likes_id) REFERENCES likes(likes_id) ON DELETE CASCADE
 );
+
+
+
+CREATE TABLE IF NOT EXISTS track_contributors(
+    artist_id BIGINT,
+    track_id BIGINT,
+    PRIMARY KEY (track_id, artist_id),
+    FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE,
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
+); 
+    
+
+
+
+-- CREATE TABLE IS NOT EXISTS albums_tracklist(
+-- album_id INT NOT NULL,
+-- track_id INT NOT NULL,
+-- PRIMARY KEY(track_id, album)
+-- FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE,
+-- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
+-- );
 
 -- CREATE TABLE IF NOT EXISTS playlists(
 -- playlist_id SERIAL NOT NULL,
@@ -62,18 +114,7 @@ CREATE TABLE IF NOT EXISTS likes_tracklist(
 -- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
 -- );
 
--- CREATE TABLE IF NOT EXISTS albums(
---   album_id SERIAL NOT NULL,
---   title VARCHAR(255) NOT NULL,
---   duration INT NOT NULL,
---   num_tracks INT NOT NULL,
---   is_explicit INT NOT NULL,
---   release_date DATE NOT NULL,
---   record_type VARCHAR(255) NOT NULL,
---   artist_id INT NOT NULL,
--- PRIMARY KEY(album_id)
--- FOREIGN KEY(artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE,
--- );
+
 
 -- CREATE TABLE IF NOT EXISTS tracks(
 --   track_id SERIAL NOT NULL,
@@ -90,21 +131,10 @@ CREATE TABLE IF NOT EXISTS likes_tracklist(
 -- FOREIGN KEY(artist_id) REFERENCES artsts(artist_id) ON DELETE CASCADE
 -- );
 
--- CREATE TABLE IS NOT EXISTS a_tracklist(
--- album_id INT NOT NULL,
--- track_id INT NOT NULL,
--- PRIMARY KEY(track_id, album)
--- FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE,
--- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
--- );
 
--- CREATE TABLE IS NOT EXISTS artists(
---   artist_id serial NOT NULL,
---   "name" VARCHAR(200) NOT NULL,
---   picture VARCHAR(300) NOT NULL,
---   fans INT NULL,
---   PRIMARY KEY(artist_id)
--- );
+
+
+
 
 -- CREATE TABLE IF NOT EXISTS followers
 --   (id INT NOT NULL, CONSTRAINT followers_pkey PRIMARY KEY(id));
@@ -115,14 +145,6 @@ CREATE TABLE IF NOT EXISTS likes_tracklist(
 --   album_id INT NULL,
 --   PRIMARY KEY(genre_id)
 --   FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE
--- );
-
--- CREATE TABLE IF NOT EXISTS likes(
--- id INT NOT NULL,
--- track_id INT NOT NULL,
--- PRIMARY KEY (id, track_id),
--- FOREIGN KEY(id) REFERENCES users(id) ON DELETE CASCADE,
--- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE 
 -- );
 
 -- CREATE TABLE public.profilefavs(

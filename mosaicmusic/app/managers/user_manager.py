@@ -8,19 +8,10 @@ class UserManager:
         
         return new_user
     
-    def create_user_likes(self, likes_id, id):
-        user_likes = Likes(likes_id, id)
-        return user_likes
-    
-    def get_likes_by_id(self, id):
-        get_likes = Likes.query.get(id)
-        return get_likes
-
 
     def get_user_by_id(self, id):
         get_user = User.query.get(id)
         return get_user
-    
     
 
     def update_user(self, id , email , username, password):
