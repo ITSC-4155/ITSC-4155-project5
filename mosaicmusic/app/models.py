@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable=False)
     profile_picture = db.Column(db.String, nullable=True)
     about = db.Column(db.String, nullable=True) 
-    
+    playlists = db.relationship('Playlist', backref='creator', passive_deletes=True)
     
     def __init__(self, email, username, password) -> None:
         self.email = email
@@ -124,3 +124,27 @@ class Likes(db.Model):
         self.likes_id = likes_id
         self.id = id
 
+p_tracklist = db.Table(
+    'p_tracklist',
+    db.Column('playlist_id', db.Integer,\
+          db.ForeignKey('playlists.playlist_id', ondelete='CASCADE'), primary_key=True),
+    db.Column('track_id', db.BigInteger,\
+          db.ForeignKey('tracks.track_id', ondelete='CASCADE'), primary_key=True),
+)
+
+
+class Playlist(db.Model):
+    __tablename__ = 'playlists'
+
+    playlist_id = db.Column (db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    descr = db.Column(db.String, nullable=True)
+    picture = db.Column(db.String, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    tracks = db.relationship('Track', secondary=p_tracklist, backref='playlist', passive_deletes=True)
+
+    def __init__(self, title, descr, picture, user_id) -> None:
+        self.title = title
+        self.descr = descr
+        self.picture = picture
+        self.user_id = user_id

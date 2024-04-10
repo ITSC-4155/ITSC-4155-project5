@@ -26,8 +26,7 @@ def showAlbum(id):
     album = client.get_album(id)
     likes = likes_manager_class.get_likes_by_id(current_user.id)
     mylikes = likes.tracks
-    
-    
+
        
     return render_template('album.html', album=album, likes = mylikes)
 
@@ -48,7 +47,7 @@ def likeTrack(track_id):
         db.session.add(artist)
       
     
-        
+    # search for album in local DB, add album if not there
     getalbum = api_manager_class.get_album_by_id(track.album.id)
     if not getalbum:
             album_id = track.album.id
@@ -65,9 +64,8 @@ def likeTrack(track_id):
             db.session.commit()
            
 
-
+      # search for track in local DB, add track if not there
     gettrack = api_manager_class.get_track_by_id(track_id)
-    
     if not gettrack:
 
         track_id = track_id

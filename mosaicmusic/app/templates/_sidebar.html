@@ -24,7 +24,7 @@
           <div class="collapse" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled  fw-normal pb-1 small px-4">
               {# TODO: Display a list of playlists attatched to the logged in user #}
-              <li class=""><a href="#" class="link-light rounded">[playlist]</a></li>
+              <li class=""><a href="/playlists/all" class="link-light rounded">View All</a></li>
     
             </ul>
           </div>
@@ -36,10 +36,10 @@
             Account
           </button>
           <div class="collapse" id="account-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">Profile</a></li>
-              <li><a href="#" class="link-dark rounded">Settings</a></li>
-              <li><a href="#" class="link-dark rounded">Sign out</a></li>
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small mx-4">
+              <li><a href="/profiles/{{current_user.id}}" class=" link-light rounded">Profile</a></li>
+              <li><a href="/my/account" class="link-light =">Settings</a></li>
+              <li><a href="/logout" class="link-danger ">Sign out</a></li>
             </ul>
           </div>
         </li>
