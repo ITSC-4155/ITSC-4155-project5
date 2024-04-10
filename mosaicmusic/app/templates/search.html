@@ -1,0 +1,89 @@
+{% extends '_base.html' %}
+
+{% block head %}
+  {{ super() }}
+  <style>
+    @media (min-width: 992px) { 
+      .row-cols-custom-5 {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .row-cols-custom-5 > .col {
+        flex: 0 0 auto;
+        width: 20%; 
+      }
+    }
+
+    /* Style adjustments for image and card */
+    .card-img-top {
+      width: 10vw;
+      height: 10vw; 
+      object-fit: cover;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* card body */
+    .card-body {
+      padding: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1rem; 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-text,
+    .text-muted {
+      font-size: 0.8rem; 
+    }
+
+    /* Adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .row-cols-custom-5 > .col {
+        width: 33.33333333%; 
+      }
+      .card-img-top {
+        height: 25vw; 
+      }
+    }
+
+    @media (max-width: 576px) {
+      .row-cols-custom-5 > .col {
+        width: 50%; 
+      }
+      .card-img-top {
+        height: 40vw; 
+      }
+    }
+  </style>
+{% endblock head %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="text-center mb-4 fw-bold">Top track results for "{{ query }}"</h2>
+    <div class="row g-4 row-cols-custom-5 p-4">
+      {% for track in results[:25] %}
+      <div class="col">
+        <div class=" h-100">
+          <img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="card-img-top rounded" alt="{{ track.album.title }}">
+          <div class="card-body">
+            <h5 class="card-title fw-bold flex-wrap">{{ track.title }} {% if track.explicit_lyrics == True%}
+              <p class="badge m-0 text-danger">E</p> 
+             {% endif %}</h5>
+            <p class="card-text m-0"><a class="link-light link-opacity-50-hover text-decoration-none" href="/api/artist/{{track.artist.id}}">{{ track.artist.name }}</a></p>
+            <p class="card-text fw-light m-0">from <a class="link-warning link-opacity-50-hover text-decoration-none" href="/api/album/{{track.album.id}}" class="">{{ track.album.title|truncate(20,'...') }}</a></p>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <p>No results found.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

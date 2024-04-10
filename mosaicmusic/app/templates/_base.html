@@ -11,26 +11,26 @@
     {% endblock %}
    
     <script src="https://kit.fontawesome.com/6079d96043.js" crossorigin="anonymous"></script>
-   
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png">
     
     <title>{% block title%}MosaicMusic{% endblock title %}</title>
     {% endblock %}
   </head>
-<body>
-    <div class="w-100 h-100 bg-dark overflow-hidden" > 
+<body style="background-color: black;">
+    <div class="w-100 h-100 bg-dark " > 
         <nav class="navbar  navbar-expand-lg" style="background-color: #90742C;">
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand" href="/"><img src="../static/images/mm_logo_brand.png"></img></a>
+              <a class="navbar-brand" href="/"><img src="/static/images/mm_logo_brand.png"></img></a>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
                  
                       <form class="d-flex" role="search" action="{{ url_for('search.search') }}" method="get">
-                        <input class="form-control me-2 bg-dark border-0 rounded-pill text-white" type="search" name="query" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2 bg-dark border-0 rounded-pill text-white" type="search" name="query" id="query" placeholder="Search" aria-label="Search">
                         <button class="btn" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -71,9 +71,27 @@
         {% block content %}
         {% endblock content%}
     </div>
+
+
     </div>
     {% block scripts %}
     {{ bootstrap.load_js() }}
+
+      <script>
+
+      var input = document.getElementById("myInput");
+
+      // Execute a function when the user presses a key on the keyboard
+      input.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          document.getElementById("query").click();
+        }
+      }); 
+      </script>
     {% endblock %}
 </body>
 

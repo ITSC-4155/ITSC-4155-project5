@@ -1,0 +1,91 @@
+{% extends "_base.html" %} {%block content%}
+
+<div class="d-flex flex-row">
+  <div class="d-flex flex-row vw-100">
+  {%include "_sidebar.html"%}
+  <div class="w-100 ">
+    <!-- album info section -->
+    <div class="p-4 bg-black">
+        <div class="d-flex flex-row"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
+      <div class="d-flex flex-column p-3">
+        <div class="text-tertiary fw-light text-uppercase">{{album.record_type}}</div>
+        <h1 class="fw-bold">{{album.title}}</h1>
+      <div class="fw-bold"><a href="/api/artist/{{album.artist.id}}">{{album.artist.name}}</a> | {{album.release_date.strftime("%Y") }} | {{album.nb_tracks }} tracks</div>
+    </div>
+    </div>
+      
+    </div>
+    <div class="p-4">
+        <div class="row text-uppercase" style="font-size: small; color: #818283;">
+            <div class="col-1 text-center">#</div>
+            <div class="col-5"> title</div>
+            <div class="col-3">extra</div>
+            <div class="col-2">duration</div>    
+        </div>
+      <hr class="my-1">
+<div class=" overflow-y-auto overflow-x-hidden" style="height: 410px;">
+
+    <!-- loop to show each track -->
+{% for track in album.tracks %}
+
+      <div class="row d-flex align-items-center ">
+        <div class="col-1 text-center">{{track.track_position}}</div>
+        <div class="col-5"><div class="fw-bold">{{track.title}}
+          {% if track.explicit_lyrics == True%}
+          <p class="badge m-0 text-danger">E</p> 
+         {% endif %}
+        </div>
+            <div class="flex flex-row fw-light"> 
+                {% for contributor in track.contributors %}
+                {% if contributor == track.contributors|last %}
+                {{contributor.name}}
+                {% else %}
+                {{contributor.name}},
+                {%endif%}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="flex flex-row mx-5">...</div>
+        </div>
+        <div class="col-1">
+          <div class="flex flex-row mx-5">
+            {% if current_user.is_authenticated %}         
+            {% set ids = likes|map(attribute="track_id") %}
+
+            {% if track.id in ids %}
+              <form method="post" action="/api/track/{{track.id}}/unlike">
+                <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
+              </form>
+
+            {% else %}
+
+            <form method="post" action="/api/track/{{track.id}}/like">
+              <button type="submit" class="btn text-warning"><i class="fa-regular fa-heart"></i></button>
+            </form>
+
+            {% endif %}
+{%else%}
+{%endif%}
+
+              
+           
+        
+           
+        </div>
+      </div>
+        <div class="col-1 text-center"> {% set seconds = track.duration %}
+          {% set minutes = seconds // 60 %} 
+          {% set sec = seconds % 60 %}
+      {{"%01d:%02d" % (minutes, sec)}}</div>  
+        <hr class="w-75 mx-auto my-2">
+      </div>
+
+      {% endfor %}
+    </div>
+</div>
+  </div>
+</div>
+</div>
+{%endblock content%}
