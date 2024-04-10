@@ -1,8 +1,8 @@
-from ..models import db, User, Likes
+from ..models import db, User, Likes, Artist
 from flask_bcrypt import Bcrypt
 from ..managers.user_manager import user_manager_class
 from ..managers.likes_manager import likes_manager_class
-from ..managers.track_manager import track_manager_class
+from ..managers.api_manager import api_manager_class
 
 
 from flask_login import login_user, login_required, current_user,logout_user
@@ -62,9 +62,13 @@ def likes():
         db.session.add(new_user_likes)
         db.session.commit()
 
-    mylikes = likes.tracks
+        likes = likes_manager_class.get_likes_by_id(current_user.id)
 
- 
+    artists = Artist.query.get
 
-    return render_template('likes.html', current_user=current_user, likes=mylikes)
+    
+    mylikes = likes.tracks   
+
+
+    return render_template('likes.html', current_user=current_user, likes=mylikes, artists=artists)
 
