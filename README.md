@@ -1,4 +1,4 @@
-# ITSC-4155-project7 - (Mosaic Music)
+# ITSC-4155-project8 - (Mosaic Music)
 
 ### Group 4 
 &nbsp;&nbsp;&nbsp;&nbsp;**Scrum Master**
@@ -14,7 +14,11 @@
     - Jasmine Kingg
     - Sanjana Bansal
 
-# Instructions
+
+# Updating Instructions
+
+
+# [Installation] Instructions
 **Needed materials:**
 > pgadmin4 client
 > 

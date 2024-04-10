@@ -1,12 +1,14 @@
-from ..models import db, User
+from ..models import db, User, Likes
 
 # Repository for manipulating User data
 
 class UserManager:
     def create_user(self, email, username, password):
         new_user = User(email, username, password)
+        
         return new_user
     
+
     def get_user_by_id(self, id):
         get_user = User.query.get(id)
         return get_user
