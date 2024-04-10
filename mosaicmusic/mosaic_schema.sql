@@ -56,14 +56,12 @@ FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE
 );
 
 
-
 CREATE TABLE IF NOT EXISTS likes (
     likes_id SERIAL NOT NULL,
     id INT NOT NULL,
     PRIMARY KEY (likes_id),
     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE 
 );
-
 
 
 CREATE TABLE IF NOT EXISTS likes_tracklist(
@@ -84,6 +82,27 @@ CREATE TABLE IF NOT EXISTS track_contributors(
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE
 ); 
     
+CREATE TABLE IF NOT EXISTS playlists(
+playlist_id SERIAL NOT NULL,
+title VARCHAR(300) NOT NULL,
+descr VARCHAR(255),
+picture VARCHAR(300),
+user_id INT NOT NULL,
+PRIMARY KEY(playlist_id),
+FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS p_tracklist(
+playlist_id INT NOT NULL,
+track_id BIGINT NOT NULL,
+PRIMARY KEY(track_id, playlist_id),
+FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
+FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
+);
+
 
 
 
@@ -94,45 +113,6 @@ CREATE TABLE IF NOT EXISTS track_contributors(
 -- FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE,
 -- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
 -- );
-
--- CREATE TABLE IF NOT EXISTS playlists(
--- playlist_id SERIAL NOT NULL,
--- title VARCHAR(300) NOT NULL,
--- descr VARCHAR(255),
--- picture VARCHAR(300),
--- link VARCHAR(300),
--- creator INT,
--- PRIMARY KEY(playlist_id),
--- FOREIGN KEY(creator) REFERENCES users(id) ON DELETE CASCADE,
--- );
-
--- CREATE TABLE IF NOT EXISTS p_tracklist(
--- playlist_id INT NOT NULL,
--- track_id INT NOT NULL,
--- PRIMARY KEY(track_id, playlist_id)
--- FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
--- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
--- );
-
-
-
--- CREATE TABLE IF NOT EXISTS tracks(
---   track_id SERIAL NOT NULL,
---   title VARCHAR(300) NOT NULL,
---   duration INT NOT NULL,
---   is_explicit BOOLEAN NOT NULL,
---   audio_preview VARCHAR(300) NOT NULL,
---   release_date DATE NOT NULL,
---   track_position INT NOT NULL,
---   artist_id INT NOT NULL,
---   album_id INT NOT NULL,
--- PRIMARY KEY(track_id),
--- FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE,
--- FOREIGN KEY(artist_id) REFERENCES artsts(artist_id) ON DELETE CASCADE
--- );
-
-
-
 
 
 
