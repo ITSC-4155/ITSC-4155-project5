@@ -131,4 +131,6 @@ def showArtist(id):
 
     artist = client.get_artist(id)
     toptracks = client.get_artist(id).get_top()
-    return render_template('artist.html', artist=artist, toptracks=toptracks)
+    albums = client.get_artist(id).get_albums()
+
+    return render_template('artist.html', artist=artist, toptracks=toptracks, albums=albums)
