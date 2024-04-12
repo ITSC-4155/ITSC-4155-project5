@@ -31,6 +31,15 @@ def showAlbum(id):
     return render_template('album.html', album=album, likes = mylikes)
 
 
+## Get track info
+@api_pages.get('/track/<int:id>')
+def showSong(id):
+    track = client.get_track(id)
+    artists = track.contributors
+    album = track.album.title
+    releaseDate = track.release_date
+    return render_template('song.html', artists=artists, track=track, album=album, releaseDate=releaseDate)
+    
 
 
 @api_pages.post('/track/<int:track_id>/like/')
