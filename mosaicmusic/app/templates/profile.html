@@ -10,7 +10,13 @@
         {% else %}
         {%endif %}
         
-        <div class="p-4 d-flex flex-row"> <div class="bg-secondary rounded" style="height: 150px; width: 150px;"></div> <div class="px-3"> <h1 class="fw-bold p-2">{{user.username}}'s profile</h1>
+        <div class="p-4 d-flex flex-row"> 
+            <div class="bg-secondary rounded" style="height: 150px; width: 150px;">
+                {#profile pictute#}
+                {{ user.profile_picture }}
+            </div>
+             <div class="px-3">
+                 <h1 class="fw-bold p-2">{{user.username}}'s profile</h1>
         <p class="mx-4"> 0 Friends - 0 Followers - 0 Playlists</p></div>
      
         </div>
