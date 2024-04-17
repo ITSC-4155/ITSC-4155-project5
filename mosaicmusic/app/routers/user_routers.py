@@ -28,7 +28,6 @@ def account():
  return render_template('account.html', current_user=current_user)
 
 #picture profile#
-UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -44,18 +43,16 @@ def update_user():
     # generate password hash 
     hashed_password = bcrypt.generate_password_hash(password).decode()
 
-    profile_picture_url = None
+    
     if profile_picture and allowed_file(profile_picture.filename):
         # Choose the directory where you want to save the file
-        upload_folder = ' '
-        if not os.path.exists(upload_folder):
-            os.makedirs(upload_folder)
+      
         profile_picture_filename = secure_filename(profile_picture.filename)
-        profile_picture.save(os.path.join(upload_folder, profile_picture_filename))
-        profile_picture_url = os.path.join(upload_folder, profile_picture_filename)
+        profile_picture.save(os.path.join('app/static', 'upload_images', profile_picture_filename))
+      
     
     # Update User in database
-    user_manager_class.update_user(current_user.id, email, username, hashed_password, profile_picture_url)
+    user_manager_class.update_user(current_user.id, email, username, hashed_password, profile_picture_filename)
 
     flash('Your account information has been updated.')
     return redirect('/my/account')
