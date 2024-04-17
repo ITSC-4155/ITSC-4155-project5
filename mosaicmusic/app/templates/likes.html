@@ -1,104 +1,72 @@
-{% extends "_base.html" %}
-
-{% block content %}
+{% extends "_base.html" %} {%block content%}
 
 <div class="d-flex flex-row">
-    {% include "_sidebar.html" %}
-    <div>
-
-        <div class="p-4 vw-100 bg-black">
-            <h1 class="fw-bold text-white">Liked Songs</h1>
+  <div class="d-flex flex-row vw-100">
+  {%include "_sidebar.html"%}
+  <div class="w-100 ">
+    <!-- Like info section -->
+    <div class="p-4 bg-black">
+        <div class="d-flex flex-row">
+      <div class="d-flex flex-column p-3">
+        
+        <h1 class="fw-bold">LIKED SONGS</h1>
+      <div class="fw-bold"></div>
+    </div>
+    </div>
+      
+    </div>
+    <div class="p-4 m-2">
+        <div class="row text-uppercase" style="font-size: small; color: #818283;">
+            <div class="col-2 text-center"></div>
+           
+            <div class="col-3 ">title</div>
+            <div class="col-3">album</div>
+            <div class="col-2">Extra</div>
+            <div class="col-1">duration</div>    
         </div>
-        <div class="p-4">
+      <hr class="my-1">
+<div class=" overflow-y-auto overflow-x-hidden" style="height: 450px;">
 
-       
-            <div class="title-details">
-                <p class="title" style="display: inline-block; margin-left: 150px; margin-right:500px">TITLE</p>
-                <p class="album" style="display: inline-block; margin-right: 500px; ">ALBUM</p>
-                <p class="duration" style="display: inline-block;">DURATION</p>
-            </div>
-            <hr style="margin-top: 5px; margin-bottom: 5px;">
-            <div class="song-list">
-                <div class="song">
-                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
-                <div class="song-details">
-                    <h5 class="song-title">Song name</h5>
-                        <p class="song-artist">artist</p>
-                    </div>
-                    <p class="song-album">album name</p>
-                    <p class="song-duration">1:23</p>
-                </div>
-                <hr>
-            <div class="song">
-                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
-                <div class="song-details">
-                    <h5 class="song-title">Song name</h5>
-                        <p class="song-artist">artist</p>
-                </div>
-                    <p class="song-album">album name</p>
-                    <p class="song-duration">1:23</p>
-                </div>
-            </div>
-            <hr>
-            <div class="song">
-                <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
-                <div class="song-details">
-                    <h5 class="song-title">Song name</h5>
-                        <p class="song-artist">artist</p>
-                    </div>
-                    <p class="song-album">album name</p>
-                    <p class="song-duration">1:23</p>
-                </div>
-                <hr>
-                <div class="song">
-                    <img src="{{ url_for('static', filename='images/temp_music.jpeg') }}" alt="Image">
-                    <div class="song-details">
-                        <h5 class="song-title">Song name</h5>
-                            <p class="song-artist">artist</p>
-                        </div>
-                        <p class="song-album">album name</p>
-                        <p class="song-duration">1:23</p>
-                    </div>
-                    <hr>
-                    
+    <!-- loop to show each track -->
+{% for track in likes %}
 
-
+      <div class="row d-flex align-items-center ">
+        <div class="col-1 text-end">{{loop.index}}</div>
+    
+        <div class="col-4 d-flex flex-row">
+          <div class="px-4 "><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 50px; width: 50px;"/></div><div><div class="fw-bold">{{track.title}}
+            {% if track.is_explicit == True%}
+            <p class="badge m-0 text-danger">E</p> 
+           {% endif %}
+          </div>
+            <div class="flex flex-row fw-light"> 
+             {{track.artist.name}}
+            </div></div>
         </div>
+
+        <div class="col-3">
+            <div class="flex flex-row mx-0">{{track.album.title}}
+             
+            </div>
+        </div>
+        <div class="col-2">
+          <div class="flex flex-row ">
+            <form method="post" action="/api/track/{{track.track_id}}/unlike">
+              <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
+            </form>
+        </div>
+      </div>
+        <div class="col-1"> {% set seconds = track.duration %}
+          {% set minutes = seconds // 60 %} 
+          {% set sec = seconds % 60 %}
+      {{"%01d:%02d" % (minutes, sec)}}</div>  
+        <hr class=" mx-auto my-2">
+      </div>
+
+      {% endfor %}
     </div>
 </div>
-<style>
-    .song {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px; /* Add some margin between each song */
-    }
-    
-    .song img {
-        width: 100px;
-        height: 100px;
-        margin-right: 20px;
-    }
-    
-    .song-details {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .song-details h3,
-    .song-details p {
-        margin: 0; 
-    }
-    
-    .song-details p {
-        margin-bottom: 5px;
-    }
-    
-    .song-album,
-    .song-duration {
-        margin-right: 40px;
-        margin-left: 460px;
-    }
-</style>
-
-
-{% endblock content %}
+  </div>
+</div>
+</div>
+{%endblock content%}

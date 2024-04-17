@@ -1,9 +1,10 @@
 {% extends "_base.html" %} {%block content%}
 
 <div class="d-flex flex-row">
+  <div class="d-flex flex-row vw-100">
   {%include "_sidebar.html"%}
 
-  <div class="p-4">
+  <div class="p-5">
     <h1 class="fw-bold">Home</h1>
 
     <div class="m-4 w-100 col">
@@ -22,7 +23,7 @@
             <div class="fw-light "><a class="link-warning link-opacity-50-hover text-decoration-none"
                 href="/api/artist/{{album.artist.id }}"
                 style="font-size: medium;">{{album.artist.name|truncate(13,'...')}}</a></div>
-            <div class="text-secondary">{{album.release_date}}</div>
+            <div class="text-secondary">{{album.release_date.strftime("%b %d, %Y") }}</div>
           </div>
         </div>
 
@@ -50,6 +51,7 @@
     </div>
   </div>
   </div>
+</div>
 </div>
 
 {%endblock content%}
