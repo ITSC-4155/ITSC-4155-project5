@@ -30,9 +30,11 @@ def account():
 #picture profile#
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+  
 @user_pages.post('/account')
 def update_user():
     email = request.form.get('email')
@@ -86,6 +88,5 @@ def likes():
 
     
     mylikes = likes.tracks   
-
 
     return render_template('likes.html', current_user=current_user, likes=mylikes, artists=artists)
