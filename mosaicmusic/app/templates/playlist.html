@@ -1,18 +1,29 @@
-
-{% extends '_base.html' %}
+files
+{% extends 'base.html' %}
 
 {% block content %}
 
-<h1>See all the playlists!</h1>
+<div class="jumbotron">
+  <h1>{{ playlist.name }}!</h1>
+  {% if playlist.description %}
+  <p class="lead">{{ playlist.description }}</p>
+  {% endif %}
+</div>
 
-<ul>
-{% for playlist in playlists %}
-  <li>
-     <a href="/playlists/{{ playlist.id }}">{{ playlist.name }}</a>
-  </li>
-{% endfor %}
-</ul>
 
-<p><a class="btn btn-primary" href="/playlists/add">Add a playlist</a></p>
+<div class="text-info">
+  <h3>OTHER SONGS IN THIS PLAYLIST</h3>
+  <ul>
+    {% for song in playlist.songs %}
+    <li><a href="/songs/{{song.id}}">{{song.title}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<p>
+  <a class=" btn btn-primary" href="/playlists/{{ playlist.id }}/add-song">
+    Add Song To Playlist
+  </a>
+</p>
 
 {% endblock %}
