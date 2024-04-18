@@ -13,12 +13,18 @@ class ApiManager:
         get_track = Track.query.get(track_id)
         return get_track
     
+    def get_first_track(self, track_id):
+        first_track = Track.query.filter_by(track_id=track_id).first()
+        return first_track
+
+
     def add_album(self, album_id, title, duration, num_tracks, is_explicit, release_date, \
                      record_type, artist_id ):
         new_album = Album( album_id, title, duration, num_tracks, is_explicit, release_date, \
                      record_type, artist_id )
         return new_album
     
+
     def get_album_by_id(self, album_id):
         get_album = Track.query.filter_by(album_id=album_id).first()
         return get_album

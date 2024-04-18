@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="d-flex flex-row">
+    <div class="d-flex flex-row vw-100">
+    {%include "_sidebar.html"%}
+
+      
+  <div class="d-flex flex-column p-3 w-50 vh-100 p-4">
+   
+    <h1 class="fw-bold mb-4">Create Playlist</h1>
+
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column px-4">
+        <label for="">Playlist Title</label>
+        <input 
+        class="form-control bg-secondary border-black "
+        name="title" id="title" type="text" placeholder="Playist Title">
+
+        <label for="">Description</label>
+        <textarea 
+        placeholder="Enter description"
+        class="form-control bg-secondary border-black "></textarea>
+
+        <div class="col-4 px-2">
+            <label class="p-1" for="picture">Playlist Image</label>
+                        <input 
+                            name="picture"
+                            type="file"
+                            accept="image/*"
+                            class="form-control bg-secondary border-black"
+                            id="profile_picture"
+                        >
+            </input>
+        </div>
+        <button 
+        type="submit"
+        class="btn btn-warning rounded-pill m-2"> Create Playlist</button>
+    </form>
+
+</div>
+</div>
+  
+</div>
+</div>
+
+
+{% endblock %}
