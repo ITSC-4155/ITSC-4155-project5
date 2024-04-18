@@ -13,7 +13,7 @@
   {% endif %}
   {% endwith %}
     <h5>Edit Account Info</h5>
-    <form class="col" action="/my/account" method="post">
+    <form class="col" action="/my/account" method="post" enctype="multipart/form-data">
         <div class="col-4 px-2">
             <label class="p-1" for="email">Edit Email</label>
             <input 
@@ -49,6 +49,18 @@
     required
 ></input>
 </div>
+</div>
+{#picture profile#}
+<div class="col-4 px-2">
+    <label class="p-1" for="profile_picture">Profile Picture</label>
+                <input 
+                    name="profile_picture"
+                    type="file"
+                    accept="image/*"
+                    class="form-control bg-secondary border-black"
+                    id="profile_picture"
+                >
+    </input>
 </div>
 <button
 type="submit"
