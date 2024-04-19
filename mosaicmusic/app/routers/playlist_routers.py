@@ -38,7 +38,6 @@ def allowed_file(filename):
 def create_playlist_page():
 
 
-
     return render_template("create_playlist.html")
 
 @playlist_blueprint.post("create")
@@ -58,7 +57,7 @@ def create_playlist():
         playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
     
     else:
-        playlist_picture_filename = ""
+        playlist_picture_filename = "iphone.jpg"
 
     new_playlist = playlist_manager_class.create_playlist(title, descr, playlist_picture_filename, user_id)
     db.session.add(new_playlist)
@@ -66,6 +65,37 @@ def create_playlist():
     return redirect("/")
 
 
+@playlist_blueprint.route("/<int:id>/edit")
+def show_edit_playlist(id):
+
+    playlist = playlist_manager_class.get_playlist_by_id(id)
+    return render_template("edit_playlist.html", playlist=playlist)
+
+
+@playlist_blueprint.post("/<int:id>/edit")
+def edit_playlist(id):
+
+    title = request.form.get('title')
+    descr = request.form.get('description')
+    playlist_picture = request.files.get('picture')
+    playlist_id = id
+    
+
+    playlist_picture_filename = None
+    if playlist_picture and allowed_file(playlist_picture.filename):
+        # Choose the directory where you want to save the file
+      
+        playlist_picture_filename = secure_filename(playlist_picture.filename)
+        playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
+    
+    else:
+        playlist_picture_filename = "iphone.jpg"
+
+    update_playlist = playlist_manager_class.update_playlist(id, title, descr, playlist_picture_filename)
+    db.session.add(update_playlist)
+    db.session.commit()
+
+    return redirect(f'/playlists/{id}')
 
 
 

@@ -23,8 +23,27 @@
 
     </div>
     <div class="p-4">
-    <h3 class="fw-bold"> Mosaic</h3>    
-    <h3 class="fw-bold"> Playlists</h3>
+    <h3 class="fw-bold"> Mosaic</h3>   
+    
+    <div>
+        <h3 class="fw-bold"> Playlists</h3>
+        <div class="d-flex flex-row">
+            {% for playlist in user.playlists %}
+          <div class="d-flex flex-column p-3">
+            {% if playlist.picture == "" %}
+          <img src="/static/upload_images/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
+          {% else %}
+          <img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
+          {% endif %}
+          
+            <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/playlists/{{playlist.playlist_id}}">{{playlist.title}}</a></div>
+            <div class="fw-light"></div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+   
+    
 </div>
 </div>
     </div>
