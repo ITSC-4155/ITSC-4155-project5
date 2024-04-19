@@ -25,11 +25,11 @@
         <div class="row d-flex align-items-center ">
           <div class="col-1 text-end"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="rounded" style="height: 50px; width: 50px;" /></div>
           <div class="col-4">
-            <div class="fw-bold">{{track.title}}
+            <a href="/api/track/{{track.id}}"><div class="fw-bold">{{track.title}}
               {% if track.explicit_lyrics == True%}
                <p class="badge m-0 text-danger">E</p> 
               {% endif %}
-            </div>
+            </div></a>
             <div class="flex flex-row fw-light">
               {% for contributor in track.contributors %}
               {% if contributor == track.contributors|last %}

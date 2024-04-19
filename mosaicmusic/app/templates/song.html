@@ -6,10 +6,14 @@
     <title>Song</title>
 </head>
 <body>
-    <img src="../images/temp_music.jpeg" alt="temporary music picture"> <!-- image of the song -->
-    <h1>Song Name</h1>
-    <h3>Singers: Abcd, Efgh</h3>
-    <h3>Album: Alphabets</h3>
-    <h3>Release Year: 2024</h3>
+    <img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" alt="temporary music picture"> <!-- image of the song -->
+    <h1>Song: {{track.title}}</h1>
+    <h3>Singers: 
+        {% for artist in artists: %}
+        {{artist.name}}<span>,</span>
+        {% endfor %}
+    </h3>
+    <h3>Album: {{album}}</h3>
+    <h3>Release Year: {{releaseDate}}</h3>
 </body>
 </html>
