@@ -3,6 +3,10 @@ from flask_bcrypt import Bcrypt
 from ..managers.user_manager import user_manager_class
 from ..managers.likes_manager import likes_manager_class
 from ..managers.api_manager import api_manager_class
+from werkzeug.utils import secure_filename
+from flask import current_app
+from flask import url_for
+import os
 
 
 from flask_login import login_user, login_required, current_user,logout_user
@@ -23,18 +27,34 @@ def account():
 
  return render_template('account.html', current_user=current_user)
 
+#picture profile#
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+  
 @user_pages.post('/account')
 def update_user():
     email = request.form.get('email')
     username = request.form.get('username')
-    password = request.form.get('password')   
+    password = request.form.get('password')
+    profile_picture = request.files.get('profile_picture') 
 
     # generate password hash 
     hashed_password = bcrypt.generate_password_hash(password).decode()
 
+    
+    if profile_picture and allowed_file(profile_picture.filename):
+        # Choose the directory where you want to save the file
+      
+        profile_picture_filename = secure_filename(profile_picture.filename)
+        profile_picture.save(os.path.join('app/static', 'upload_images', profile_picture_filename))
+      
+    
     # Update User in database
-    user_manager_class.update_user(current_user.id, email, username, hashed_password)
+    user_manager_class.update_user(current_user.id, email, username, hashed_password, profile_picture_filename)
 
     flash('Your account information has been updated.')
     return redirect('/my/account')
@@ -69,6 +89,4 @@ def likes():
     
     mylikes = likes.tracks   
 
-
     return render_template('likes.html', current_user=current_user, likes=mylikes, artists=artists)
-
