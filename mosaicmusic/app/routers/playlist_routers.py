@@ -19,23 +19,6 @@ import os
 
 playlist_blueprint = Blueprint('playlist', __name__, template_folder="templates", url_prefix='/playlists')
 
-<<<<<<< HEAD
-@playlist_blueprint.route('/all')
-def show_all_playlists():
-    if not g.current_user.is_authenticated:
-        # Redirect to login or handle it appropriately if user is not authenticated
-        pass
-    playlists = playlist_manager_class.get_playlists_by_user(g.current_user.id)
-    return render_template('playlist.html', playlists=playlists)
-
-@playlist_blueprint.app_context_processor
-def inject_user_playlists():
-    if hasattr(g, 'current_user') and g.current_user.is_authenticated:
-        user_playlists = playlist_manager_class.get_playlists_by_user(g.current_user.id)
-        return {'user_playlists': user_playlists}
-    return {'user_playlists': []}
-
-=======
 @playlist_blueprint.route("/<int:id>")
 def get_playlist(id):
     
@@ -200,7 +183,6 @@ def remove_track(id, track_id):
 
     db.session.commit()
     return redirect(f'/playlists/{id}')
->>>>>>> dea93f5401d66c54002070d979572031a2775139
 
 
 # @playlist_blueprint.route("/playlists/<int:playlist_id>")
