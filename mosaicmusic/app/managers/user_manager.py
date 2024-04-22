@@ -14,12 +14,12 @@ class UserManager:
         return get_user
     
 
-    def update_user(self, id , email , username, password, profile_picture=None):
+    def update_user(self, id , email , username, password, profile_picture):
         update_user = User.query.get(id)
         update_user.username = username
         update_user.email = email
         update_user.password = password
-        if profile_picture:
+        if profile_picture != None:
             update_user.profile_picture = profile_picture
 
         db.session.commit()
