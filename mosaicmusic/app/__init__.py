@@ -2,6 +2,8 @@ from flask import Flask
 from flask_bootstrap import Bootstrap5
 from config import Config
 from deezer import Client
+from flask import g
+from .managers.playlist_manager import playlist_manager_class
 
 from .routers import auth_routers, user_routers, profile_routers, search_routers, api_routers, playlist_routers
 
@@ -26,7 +28,12 @@ login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
 
-
+@app.context_processor
+def inject_user_playlists():
+    if hasattr(g, 'current_user') and g.current_user.is_authenticated:
+        user_playlists = playlist_manager_class.get_playlists_by_user(g.current_user.id)
+        return {'user_playlists': user_playlists}
+    return {'user_playlists': []}
 
 
 @login_manager.user_loader
