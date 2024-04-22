@@ -4,12 +4,11 @@ from ..managers.user_manager import user_manager_class
 from ..managers.likes_manager import likes_manager_class
 from ..managers.api_manager import api_manager_class
 from werkzeug.utils import secure_filename
-from flask import current_app
-from flask import url_for
+
 import os
 
 
-from flask_login import login_user, login_required, current_user,logout_user
+from flask_login import  current_user,logout_user
 
 from flask import (
     Blueprint, flash, redirect, render_template, request
@@ -20,6 +19,7 @@ user_pages = Blueprint('user', __name__, template_folder="templates", url_prefix
 
 
 
+
 ## These routers will be used for viewing and managing  user - specific information
 
 @user_pages.route('/account')
@@ -27,13 +27,12 @@ def account():
 
  return render_template('account.html', current_user=current_user)
 
+
 #picture profile#
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
   
 @user_pages.post('/account')
 def update_user():
@@ -46,6 +45,7 @@ def update_user():
     hashed_password = bcrypt.generate_password_hash(password).decode()
 
     
+    profile_picture_filename = None
     if profile_picture and allowed_file(profile_picture.filename):
         # Choose the directory where you want to save the file
       

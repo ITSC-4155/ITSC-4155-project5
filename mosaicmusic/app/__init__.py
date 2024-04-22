@@ -19,6 +19,8 @@ login_manager = LoginManager()
 # Initializing the app and plugins
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(Config)
+
+
 bootstrap = Bootstrap5(app)
 db.init_app(app)
 auth_routers.bcrypt.init_app(app)
