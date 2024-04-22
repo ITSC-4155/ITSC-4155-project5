@@ -23,8 +23,12 @@
           </button>
           <div class="collapse" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled  fw-normal pb-1 small px-4">
-              {# TODO: Display a list of playlists attatched to the logged in user #}
-              <li class=""><a href="/playlists/all" class="link-light rounded">View All</a></li>
+              {% for playlist in current_user.playlists %}
+              <li class=""><a href="/playlists/{{playlist.playlist_id}}" class="link-light rounded">{{playlist.title}}</a></li>
+              {% endfor %}
+              <hr>
+              <li class=""><a href="/playlists/create" class="link-warning rounded">Create New</a></li>
+              <li class=""><a href="/playlists/all" class="link-warning rounded">View All</a></li>
     
             </ul>
           </div>
