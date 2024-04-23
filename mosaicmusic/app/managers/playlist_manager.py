@@ -17,6 +17,12 @@ class PlaylistManager:
         db.session.commit()
         return update_playlist
     
+    def delete_playlist(self, playlist_id):
+        delete_playlist = Playlist.query.get(playlist_id)
+        if(delete_playlist):
+            db.session.delete(delete_playlist)
+        db.session.commit()
+    
     def get_playlist_by_id(self, playlist_id):
         get_playlist = Playlist.query.get(playlist_id)
         return get_playlist
