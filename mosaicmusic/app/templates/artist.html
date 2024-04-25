@@ -60,7 +60,7 @@
         <div class="d-flex flex-row">
           {% for album in albums[:8] %}
         <div class="d-flex flex-column p-3">
-          <img class="bg-secondary rounded" src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 120px; width: 120px;" />
+          <a href="/api/album/{{album.id}}"><img class="bg-secondary rounded " src="https://e-cdn-images.dzcdn.net/images/cover/{{album.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 120px; width: 120px;" /></a>
           <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/api/album/{{album.id}}">{{album.title}}</a></div>
           <div class="fw-light">{{album.release_date.strftime("%Y") }}</div>
         </div>

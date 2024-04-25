@@ -97,4 +97,17 @@ def trackdetails(id):
     return render_template('song.html', artists=artists, track=track, album=album, releaseDate=releaseDate, trackobject=trackobject)
 
 
+@user_pages.route('/recommended')
+def recspage():
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
 
+    mylikes = likes.tracks
+    related = []
+
+    for track in mylikes[:3]:
+        artist = client.get_artist(track.artist.artist_id)
+        related.append(artist.get_related()[:6])
+
+    related
+    
+    return render_template("recommended.html", related=related)

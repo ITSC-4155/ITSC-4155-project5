@@ -1,5 +1,15 @@
 {% extends "_base.html" %} {%block content%}
 
+<style>
+
+
+
+audio::-webkit-media-controls-play-button{
+  color: black;
+}
+
+</style>
+
 <div class="d-flex flex-row">
   <div class="d-flex flex-row vw-100">
     {%include "_sidebar.html"%}
@@ -33,9 +43,9 @@
           {% include  "_song.html"%}
 
           <div class="row d-flex align-items-center">
-            <div class="col-1 d-flex flex-row">
+            <div class="col-1 d-flex flex-row mx-3">
               <div class="px-1">
-                <audio style="width: 50px; background-color: #ecd673" controls>
+                <audio class="rounded-pill mx1" style="width: 50px; background-color: #ecd673" controls>
                   <source src="{{track.audio_preview}}" type="audio/mpeg" />
                 </audio>
               </div>
@@ -124,7 +134,7 @@
               %} {% set sec = seconds % 60 %} {{"%01d:%02d" % (minutes, sec)}}
             </div>
 
-            
+
             {% include "_songdetails.html" %}
             <hr class="mx-auto my-2" />
           </div>

@@ -1,0 +1,27 @@
+{% extends "_base.html" %} {%block content%}
+<div class="d-flex flex-row">
+    <div class="d-flex flex-row vw-100">
+    {%include "_sidebar.html"%}
+    <div class="w-100 ">
+        
+        <div class="p-4"><h3 class="fw-bold">  RECOMMENDED </h3>
+        based on your likes</div>
+      
+        <div class="p-4">
+            <h5 class="fw-bold">ARTISTS</h5>
+
+            {% for artists in related %}
+            <div class="d-flex flex-row">
+                {% for r in artists %}
+                <div  class="d-flex flex-column text-center m-3"><img src="{{r.picture_medium}}" class="rounded bg-secondary border"
+                style="height: 100px; width: 100px;" />
+                    <a href="/api/artist/{{r.id}}">{{r.name}}</a></div>
+                {%endfor %}
+            </div>
+            {%endfor%}
+
+        </div>
+
+    </div></div></div>
+
+{%endblock content%}
