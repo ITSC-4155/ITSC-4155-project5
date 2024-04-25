@@ -19,18 +19,32 @@
         <div class="row text-uppercase" style="font-size: small; color: #818283;">
             <div class="col-1 text-center">#</div>
             <div class="col-5"> title</div>
+            {% if current_user.is_authenticated %} 
             <div class="col-3">extra</div>
+            {%else%}
+            {%endif%} 
             <div class="col-2">duration</div>    
         </div>
       <hr class="my-1">
 <div class=" overflow-y-auto overflow-x-hidden" style="height: 410px;">
 
     <!-- loop to show each track -->
-{% for track in album.tracks %}
+    
+{% for track in tracks %}
 
+
+{% include  "_song2.html"%}
       <div class="row d-flex align-items-center ">
         <div class="col-1 text-center">{{track.track_position}}</div>
-        <div class="col-5"><div class="fw-bold">{{track.title}}
+        <div class="col-5"><div class="fw-bold">  <!-- Button trigger modal -->
+          <a
+            type="button"
+            onclick="getJSON{{loop.index}}()"
+            class="link-light link-opacity-50-hover"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+           {{track.title}}</a>
           {% if track.explicit_lyrics == True%}
           <p class="badge m-0 text-danger">E</p> 
          {% endif %}
@@ -45,57 +59,28 @@
                 {% endfor %}
             </div>
         </div>
-
+        {% if current_user.is_authenticated %}  
         <div class="col-3">
 
           <div class="d-flex flex-row mx-5">
-            {% if current_user.is_authenticated %}         
-            {% set ids = likes|map(attribute="track_id") %}
-
-            {% if track.id in ids %}
-              <form method="post" action="/api/track/{{track.id}}/unlike">
-                <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
-              </form>
-
-            {% else %}
-
-            <form method="post" action="/api/track/{{track.id}}/like">
-              <button type="submit" class="btn text-warning"><i class="fa-regular fa-heart"></i></button>
-            </form>
-
-            {% endif %}
-{%else%}
-{%endif%}
-
+          
+{% include "_likebutton.html" %}
               
-<div class="dropdown ">
-  <button class="btn text-white bg-black" href="#" role="button" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fa-solid fa-ellipsis-vertical"></i>
-  </button>
-
-  <div class="dropdown-menu bg-black " aria-labelledby="dropdownMenuLink">
-   <p class="px-2 text-white">Add track to...</p> 
-   {% for playlist in current_user.playlists%}
-   <form method="post" action="/playlists/{{playlist.playlist_id}}/add/{{track.id}}">
-    
-    <button type="submit" 
-    class="dropdown-item text-white" >{{playlist.title}}</button></form>
-               
-    {% endfor %}
-   
-  </div>
-</div>   
-        
+{% include "_playlistdropdown.html" %}
+       
            
         </div>
       </div>
+      {%else%}
+{%endif%} 
         <div class="col-1 text-center"> {% set seconds = track.duration %}
           {% set minutes = seconds // 60 %} 
           {% set sec = seconds % 60 %}
       {{"%01d:%02d" % (minutes, sec)}}</div>  
+      
         <hr class="w-75 mx-auto my-2">
       </div>
-
+      {% include "_songdetails.html" %}
       {% endfor %}
     </div>
 </div>

@@ -1,0 +1,17 @@
+<div class="dropdown ">
+    <button class="btn text-white bg-black" href="#" role="button" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+    </button>
+  
+    <div class="dropdown-menu bg-black " aria-labelledby="dropdownMenuLink">
+     <p class="px-2 text-white">Add track to...</p> 
+     {% for playlist in current_user.playlists%}
+     <form method="post" action="/playlists/{{playlist.playlist_id}}/add/{{track.id}}">
+      
+      <button type="submit" 
+      class="dropdown-item text-white" >{{playlist.title}}</button></form>
+                 
+      {% endfor %}
+     
+    </div>
+  </div>   

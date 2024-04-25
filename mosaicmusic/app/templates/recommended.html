@@ -1,0 +1,51 @@
+{% extends "_base.html" %} {%block content%}
+<div class="d-flex flex-row">
+    <div class="d-flex flex-row vw-100">
+    {%include "_sidebar.html"%}
+    <div class="w-100 ">
+        
+        <div class="p-4 bg-black"><h2 class="fw-bold">  Recommended </h2>
+        <p class="fw-light mx-5">based on your likes</p></div>
+        {% if related != None%}
+        <div class="px-5">
+            <h5 class="fw-bold py-3">ARTISTS</h5>
+            <div class="overflow-y-auto  bg-black rounded" style="height: 300px; background-color: #00000065;">
+           
+                {% for artists in related %}
+            <div class="d-flex flex-row justify-content-around">
+                {% for r in artists %}
+                <a class="link-light fw-bold" href="/api/artist/{{r.id}}"> <div  class="d-flex flex-column text-center m-3"><img src="{{r.picture_medium}}" class="rounded bg-secondary border"
+                style="height: 100px; width: 100px;" />
+                   {{r.name}}</div></a>
+                {%endfor %}
+            </div>
+            {%endfor%}
+        </div>
+
+        </div>
+
+
+        <div class="p-5">
+            <h5 class="fw-bold py-3">TRACKS</h5>
+            <div class="px-4 overflow-y-auto  rounded" style="height: 300px; background-color: #00000065;">
+            {% for track in relatedtracks %}
+            <div class="d-flex ">
+            {% for data in track %}
+            <div class="p-2 w-50 border-end border-secondary"><p class="fw-bold p-0 m-0"><a class="link-light link-opacity-50-hover " href="/api/album/{{data.album.id}}">{{data.title}}</a></p>by <a class="link-warning text-decoration-none" href="">{{data.artist.name}} </a>
+
+            </div>
+            {%endfor %}
+           
+            </div>
+            <hr class="m-0">
+            {%endfor %}
+        </div>
+        </div>
+
+        {% else %}
+        <div class="fs-4 fw-bold text-center m-5">No data found. Please add more songs to your likes page.</div>
+        
+        {% endif %}
+    </div></div></div>
+
+{%endblock content%}

@@ -1,0 +1,31 @@
+
+<!-- gets song data  -->
+<script>
+    function getJSON{{loop.index}}(){
+
+    let gettrack = '{{url_for('api.trackjson', id=track.id)}}'
+
+    fetch(gettrack).then((response) => {
+    response.json().then((data) => {
+
+    document.getElementById("modtitle").textContent = data.title
+      
+    
+
+    let artistlist = ""
+    for(n in data.contributors) {
+    artistlist  += data.contributors[n].name   
+        if (n < data.contributors.length - 1){
+          artistlist += ", ";
+        }                
+    }
+    document.getElementById("modartists").textContent = artistlist
+      
+    document.getElementById("modalbum").textContent = data.album.title
+    document.getElementById("modrelease").textContent = data.release_date
+     const im = `https://e-cdn-images.dzcdn.net/images/cover/${data.md5_image}/500x500-000000-80-0-0.jpg`
+     document.getElementById("modimage").innerHTML = `<img class="w-50 rounded" src=${im}>`
+    });
+});
+    }
+</script>
