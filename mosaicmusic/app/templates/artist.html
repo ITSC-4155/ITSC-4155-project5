@@ -22,14 +22,22 @@
         <h4 class="fw-bold">Top Tracks</h4>
         {% for track in toptracks[:4] %}
 
+        {% include  "_song2.html"%}
         <div class="row d-flex align-items-center ">
           <div class="col-1 text-end"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="rounded" style="height: 50px; width: 50px;" /></div>
           <div class="col-4">
-            <a href="/api/track/{{track.id}}"><div class="fw-bold">{{track.title}}
+            <div class="fw-bold"> <a
+              type="button"
+              onclick="getJSON{{loop.index}}()"
+              class="link-light link-opacity-50-hover"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+             {{track.title}}</a>
               {% if track.explicit_lyrics == True%}
                <p class="badge m-0 text-danger">E</p> 
               {% endif %}
-            </div></a>
+            </div>
             <div class="flex flex-row fw-light">
               {% for contributor in track.contributors %}
               {% if contributor == track.contributors|last %}
@@ -37,6 +45,8 @@
               {% else %}
               {{contributor.name}},
               {%endif%}
+
+              {% include "_songdetails.html" %}
               {% endfor %}
             </div>
           </div>
