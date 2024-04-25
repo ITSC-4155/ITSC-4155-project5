@@ -2,91 +2,138 @@
 
 <div class="d-flex flex-row">
   <div class="d-flex flex-row vw-100">
-  {%include "_sidebar.html"%}
-  <div class="w-100 ">
-    <!-- Like info section -->
-    <div class="p-4 bg-black">
+    {%include "_sidebar.html"%}
+    <div class="w-100">
+      <!-- Like info section -->
+      <div class="p-4 bg-black">
         <div class="d-flex flex-row">
-      <div class="d-flex flex-column p-3">
-        
-        <h1 class="fw-bold">LIKED SONGS</h1>
-      <div class="fw-bold"></div>
-    </div>
-    </div>
-      
-    </div>
-    <div class="p-4 m-2">
-        <div class="row text-uppercase" style="font-size: small; color: #818283;">
-            <div class="col-2 text-center"></div>
-           
-            <div class="col-3 ">title</div>
-            <div class="col-3">album</div>
-            <div class="col-2">Extra</div>
-            <div class="col-1">duration</div>    
-        </div>
-      <hr class="my-1">
-<div class=" overflow-y-auto overflow-x-hidden" style="height: 450px;">
-
-    <!-- loop to show each track -->
-{% for track in likes %}
-
-      <div class="row d-flex align-items-center ">
-        <div class="col-1 text-end">{{loop.index}}</div>
-    
-        <div class="col-4 d-flex flex-row">
-          <div class="px-4 "><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 50px; width: 50px;"/></div><div><div class="fw-bold">{{track.title}}
-            {% if track.is_explicit == True%}
-            <p class="badge m-0 text-danger">E</p> 
-           {% endif %}
+          <div class="d-flex flex-column p-3">
+            <h1 class="fw-bold">LIKED SONGS</h1>
+            <div class="fw-bold"></div>
           </div>
-            <div class="flex flex-row fw-light"> 
-             {{track.artist.name}}
-            </div></div>
         </div>
+      </div>
+      <div class="p-4 m-2">
+        <div
+          class="row text-uppercase"
+          style="font-size: small; color: #818283"
+        >
+          <div class="col-2 text-center"></div>
 
-        <div class="col-3">
-            <div class="flex flex-row mx-0">{{track.album.title}}
-             
+          <div class="col-3">title</div>
+          <div class="col-3">album</div>
+          <div class="col-2">Extra</div>
+          <div class="col-1">duration</div>
+        </div>
+        <hr class="my-1" />
+        <div class="overflow-y-auto overflow-x-hidden" style="height: 450px">
+          <!-- loop to show each track -->
+          {% for track in likes %}
+
+          {% include  "_song.html"%}
+
+          <div class="row d-flex align-items-center">
+            <div class="col-1 d-flex flex-row">
+              <div class="px-1">
+                <audio style="width: 50px; background-color: #ecd673" controls>
+                  <source src="{{track.audio_preview}}" type="audio/mpeg" />
+                </audio>
+              </div>
+              <div>{{loop.index}}</div>
             </div>
-        </div>
-        <div class="col-2">
-          <div class="d-flex flex-row ">
-            <div><form method="post" action="/api/track/{{track.track_id}}/unlike">
-              <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
-            </form></div>
 
-            <div>
-              <div class="dropdown ">
-                <button class="btn text-white bg-black" href="#" role="button" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-              
-                <div class="dropdown-menu bg-black " aria-labelledby="dropdownMenuLink">
-                 <p class="px-2 text-white">Add track to...</p> 
-                 {% for playlist in current_user.playlists%}
-                 <form method="post" action="/playlists/{{playlist.playlist_id}}/add/{{track.track_id}}">
-                  
-                  <button type="submit" 
-                  class="dropdown-item text-white" >{{playlist.title}}</button></form>
-                             
-                  {% endfor %}
-                 
+            <div class="col-4 d-flex flex-row">
+              <div class="px-4">
+                <img
+                  src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg"
+                  style="height: 50px; width: 50px"
+                />
+              </div>
+              <div>
+                <div class="fw-bold">
+                  <!-- Button trigger modal -->
+                  <a
+                    type="button"
+                    onclick="getJSON{{loop.index}}()"
+                    class="link-light link-opacity-50-hover"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                   {{track.title}}</a
+                  >{% if track.is_explicit == True%}
+                  <p class="badge m-0 text-danger">E</p>
+                  {% endif %}
+                </div>
+                <div class="flex flex-row fw-light">{{track.artist.name}}</div>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div class="flex flex-row mx-0">{{track.album.title}}</div>
+            </div>
+            <div class="col-2">
+              <div class="d-flex flex-row">
+                <div>
+                  <form
+                    method="post"
+                    action="/api/track/{{track.track_id}}/unlike"
+                  >
+                    <button type="submit" class="btn text-warning">
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  </form>
+                </div>
+
+                <div>
+                  <div class="dropdown">
+                    <button
+                      class="btn text-white bg-black"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+
+                    <div
+                      class="dropdown-menu bg-black"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <p class="px-2 text-white">Add track to...</p>
+                      {% for playlist in current_user.playlists%}
+                      <form
+                        method="post"
+                        action="/playlists/{{playlist.playlist_id}}/add/{{track.track_id}}"
+                      >
+                        <button type="submit" class="dropdown-item text-white">
+                          {{playlist.title}}
+                        </button>
+                      </form>
+
+                      {% endfor %}
+                    </div>
+                  </div>
                 </div>
               </div>
-             </div>
+            </div>
+            <div class="col-1">
+              {% set seconds = track.duration %} {% set minutes = seconds // 60
+              %} {% set sec = seconds % 60 %} {{"%01d:%02d" % (minutes, sec)}}
+            </div>
+
+            
+            {% include "_songdetails.html" %}
+            <hr class="mx-auto my-2" />
+          </div>
+
+          {% endfor %}
         </div>
       </div>
-        <div class="col-1"> {% set seconds = track.duration %}
-          {% set minutes = seconds // 60 %} 
-          {% set sec = seconds % 60 %}
-      {{"%01d:%02d" % (minutes, sec)}}</div>  
-        <hr class=" mx-auto my-2">
-      </div>
-
-      {% endfor %}
     </div>
-</div>
   </div>
 </div>
-</div>
+
 {%endblock content%}

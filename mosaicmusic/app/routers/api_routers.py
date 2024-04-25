@@ -41,6 +41,13 @@ def showSong(id):
     return render_template('song.html', artists=artists, track=track, album=album, releaseDate=releaseDate)
     
 
+@api_pages.route('/<int:id>/json')
+def trackjson(id):
+    track = client.get_track(id)
+
+    return track.as_dict()
+
+
 
 @api_pages.post('/track/<int:track_id>/like/')
 def likeTrack(track_id):

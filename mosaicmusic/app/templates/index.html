@@ -9,7 +9,7 @@
 
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
-      <div class="W-75 d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1300px;">
+      <div class="W-75 d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1000px;">
         <!-- render albums from the API chart list  -->
         {% for album in albums %}
 
@@ -34,7 +34,7 @@
     </div>
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Artists</h4>
-    <div class="d-flex flex-row overflow-x-auto" style="width: 1300px; height: 225px;">
+    <div class="d-flex flex-row overflow-x-auto" style="width: 1100px; height: 225px;">
 {% for artist in artists[:8] %}
 <div class="d-flex flex-column text-center">
       <div class="p-4" >

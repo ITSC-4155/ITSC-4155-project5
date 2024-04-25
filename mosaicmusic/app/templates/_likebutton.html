@@ -1,0 +1,17 @@
+{% if current_user.is_authenticated %}         
+{% set ids = likes|map(attribute="track_id") %}
+
+{% if track.id in ids %}
+  <form method="post" action="/api/track/{{track.id}}/unlike">
+    <button type="submit" class="btn text-warning"><i class="fa-solid fa-heart"></i></button>
+  </form>
+
+{% else %}
+
+<form method="post" action="/api/track/{{track.id}}/like">
+  <button type="submit" class="btn text-warning"><i class="fa-regular fa-heart"></i></button>
+</form>
+
+{% endif %}
+{%else%}
+{%endif%}

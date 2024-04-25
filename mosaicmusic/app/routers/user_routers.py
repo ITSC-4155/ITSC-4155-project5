@@ -7,11 +7,14 @@ from werkzeug.utils import secure_filename
 
 import os
 
+import deezer
+client = deezer.Client(app_id='foo', app_secret='bar')
+
 
 from flask_login import  current_user,logout_user
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request
+    Blueprint, flash, redirect, render_template, request, url_for
 )
 
 bcrypt = Bcrypt()
@@ -71,22 +74,27 @@ def delete_user():
 
 @user_pages.route('/likes')
 def likes():
-    
+
     likes = likes_manager_class.get_likes_by_id(current_user.id)
-   
-
-    if not likes:
-        likes_id = current_user.id
-        id = current_user.id
-        new_user_likes = likes_manager_class.create_user_likes(likes_id, id)
-        db.session.add(new_user_likes)
-        db.session.commit()
-
-        likes = likes_manager_class.get_likes_by_id(current_user.id)
-
     artists = Artist.query.get
-
-    
     mylikes = likes.tracks   
 
-    return render_template('likes.html', current_user=current_user, likes=mylikes, artists=artists)
+    track_url = ''
+    temp = {}
+
+    return render_template('likes.html', current_user=current_user,likes=mylikes, artists=artists,\
+                 url_for = url_for, track_url = track_url, temp=temp)
+
+@user_pages.route('/likes/<int:id>')
+def trackdetails(id):
+    track = client.get_track(id)
+
+    trackobject = track.as_dict()
+    
+    artists = track.contributors
+    album = track.album.title
+    releaseDate = track.release_date
+    return render_template('song.html', artists=artists, track=track, album=album, releaseDate=releaseDate, trackobject=trackobject)
+
+
+

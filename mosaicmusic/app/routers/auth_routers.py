@@ -1,11 +1,14 @@
 from ..models import db, User
 from flask_bcrypt import Bcrypt
 from ..managers.user_manager import user_manager_class
+from ..managers.likes_manager import likes_manager_class
 from flask_login import login_user, login_required, current_user,logout_user
 import deezer
 from flask import (
     Blueprint, flash, redirect, render_template, request
 )
+
+
 
 
 client = deezer.Client(app_id='foo', app_secret='bar')
@@ -56,6 +59,8 @@ def register_post():
     db.session.commit()
 
     
+
+
     return redirect('/login')
 
 
@@ -84,6 +89,17 @@ def login_post():
 
     # Log User In
     login_user(user, remember=remember)
+
+    likes = likes_manager_class.get_likes_by_id(current_user.id)
+
+    if not likes:
+        likes_id = current_user.id
+        id = current_user.id
+        new_user_likes = likes_manager_class.create_user_likes(likes_id, id)
+        db.session.add(new_user_likes)
+        db.session.commit()
+
+        likes = likes_manager_class.get_likes_by_id(current_user.id)
 
 
     return redirect('/')
