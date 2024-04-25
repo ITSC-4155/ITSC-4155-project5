@@ -24,11 +24,16 @@ api_pages = Blueprint('api', __name__, template_folder="templates", url_prefix='
 def showAlbum(id):
 
     album = client.get_album(id)
-    likes = likes_manager_class.get_likes_by_id(current_user.id)
-    mylikes = likes.tracks
+
+    mylikes = None
+
+    tracks = album.get_tracks()
+    if current_user.is_authenticated == True:
+        likes = likes_manager_class.get_likes_by_id(current_user.id)
+        mylikes = likes.tracks
 
        
-    return render_template('album.html', album=album, likes = mylikes)
+    return render_template('album.html', album=album, likes = mylikes, tracks = tracks)
 
 
 ## Get track info

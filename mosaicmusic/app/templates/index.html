@@ -4,9 +4,12 @@
   <div class="d-flex flex-row vw-100">
   {%include "_sidebar.html"%}
 
-  <div class="p-5 vh-100">
-    <h1 class="fw-bold">Home</h1>
+  <div class="vh-100 w-100">
+    <div class="w-100 bg-black">
+    <h1 class="fw-bold p-4">Home</h1>
+  </div>
 
+  <div class="p-4 ">
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
       <div class="W-75 d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1000px;">
@@ -34,7 +37,7 @@
     </div>
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Artists</h4>
-    <div class="d-flex flex-row overflow-x-auto" style="width: 1100px; height: 225px;">
+    <div class="d-flex flex-row overflow-x-auto" style="width: 1000px; height: 225px;">
 {% for artist in artists[:8] %}
 <div class="d-flex flex-column text-center">
       <div class="p-4" >
@@ -51,6 +54,7 @@
     </div>
   </div>
   </div>
+</div>
 </div>
 </div>
 

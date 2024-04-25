@@ -6,7 +6,7 @@ from ..managers.api_manager import api_manager_class
 from werkzeug.utils import secure_filename
 
 import os
-
+import random
 import deezer
 client = deezer.Client(app_id='foo', app_secret='bar')
 
@@ -97,17 +97,40 @@ def trackdetails(id):
     return render_template('song.html', artists=artists, track=track, album=album, releaseDate=releaseDate, trackobject=trackobject)
 
 
+# RECOMMENDED PAGE
 @user_pages.route('/recommended')
 def recspage():
+
+
+ 
     likes = likes_manager_class.get_likes_by_id(current_user.id)
-
     mylikes = likes.tracks
-    related = []
+    if len(mylikes) != 0:
+        randomthree = []
+        
+        for i in range(3):
+            randartist = random.choice(mylikes).artist.artist_id
+            if randartist not in randomthree:
+                
+                randomthree.append(randartist)
 
-    for track in mylikes[:3]:
-        artist = client.get_artist(track.artist.artist_id)
-        related.append(artist.get_related()[:6])
+        
+        relatedartists = []
+        for n in randomthree:
+            artist = client.get_artist(n)
+            
+            relatedartists.append(artist.get_related()[:6])
+        relatedartists
 
-    related
+        relatedtracks = []
+        for artists in relatedartists:
+            for ar in artists:
+                trackartist = client.get_artist(ar.id)
+                relatedtracks.append(trackartist.get_radio()[:2])
+        relatedtracks
     
-    return render_template("recommended.html", related=related)
+    else:
+        relatedartists = None
+        relatedtracks = None
+        
+    return render_template("recommended.html", related=relatedartists, relatedtracks=relatedtracks)

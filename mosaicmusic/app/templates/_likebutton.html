@@ -1,4 +1,4 @@
-{% if current_user.is_authenticated %}         
+        
 {% set ids = likes|map(attribute="track_id") %}
 
 {% if track.id in ids %}
@@ -13,5 +13,3 @@
 </form>
 
 {% endif %}
-{%else%}
-{%endif%}
