@@ -71,16 +71,29 @@
       {% for track in results[:25] %}
       <div class="col">
         <div class=" h-100">
-          <img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="card-img-top rounded" alt="{{ track.album.title }}">
-          <div class="card-body">
-            <h5 class="card-title fw-bold flex-wrap">{{ track.title }} {% if track.explicit_lyrics == True%}
-              <p class="badge m-0 text-danger">E</p> 
-             {% endif %}</h5>
-            <p class="card-text m-0"><a class="link-light link-opacity-50-hover text-decoration-none" href="/api/artist/{{track.artist.id}}">{{ track.artist.name }}</a></p>
-            <p class="card-text fw-light m-0">from <a class="link-warning link-opacity-50-hover text-decoration-none" href="/api/album/{{track.album.id}}" class="">{{ track.album.title|truncate(20,'...') }}</a></p>
+        <div class="d-flex mx-auto"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="card-img-top rounded" alt="{{ track.album.title }}">
           </div>
+          <div class="card-body">
+            <div class="d-flex flex-row ">
+              {% include "_playlistdropdown.html" %}
+
+              <div>
+                <h5 class="card-title fw-bold flex-wrap ">{{ track.title|truncate(20,'...') }} {% if track.explicit_lyrics == True%}
+                  <p class="badge m-0 text-danger">E</p> 
+                 {% endif %}</h5>
+                <p class="card-text m-0"><a class="link-light link-opacity-50-hover text-decoration-none" href="/api/artist/{{track.artist.id}}">{{ track.artist.name }}</a></p>
+                <p class="card-text fw-light m-0">from <a class="link-warning link-opacity-50-hover text-decoration-none" href="/api/album/{{track.album.id}}" class="">{{ track.album.title|truncate(20,'...') }}</a></p>
+              </div>
+            </div>
+            
+            
+          </div>
+         
         </div>
+      
       </div>
+
+     
       {% else %}
       <p>No results found.</p>
       {% endfor %}

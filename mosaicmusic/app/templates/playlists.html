@@ -1,0 +1,27 @@
+{% extends "_base.html" %} {%block content%}
+<div class="d-flex flex-row">
+    <div class="d-flex flex-row vw-100 vh-100">
+    {%include "_sidebar.html"%}
+    <div class="w-100 ">
+        
+        <div class="p-4 bg-black"><h2 class="fw-bold">  All Playlists </h2>
+        <p class="fw-light mx-5">Library of all of your playlists</p></div>
+       
+<div class="m-4 d-flex">
+  {% for playlist in playlists %}
+  <div class="d-flex flex-column p-3 ">
+    {% if playlist.picture == "" %}
+  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+  {% else %}
+  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+  {% endif %}
+  
+    <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/playlists/{{playlist.playlist_id}}">{{playlist.title}}</a></div>
+    <div class="fw-light"></div>
+  </div>
+  {% endfor %}
+</div>
+  
+  <!-- <p><a class="btn btn-primary" href="/playlists/add">Add a playlist</a></p> -->    </div></div></div>
+
+{%endblock content%}

@@ -27,9 +27,7 @@ class PlaylistManager:
         get_playlist = Playlist.query.get(playlist_id)
         return get_playlist
     
-    # def get_playlists_by_user(self, user_id):
-    #     get_user_playlists = Playlist.query.filter_by(user_id=user_id).first
-    #     return get_user_playlists
+
     
     def get_playlists_by_user(self, user_id):
         get_user_playlists = Playlist.query.filter_by(user_id=user_id).all()
