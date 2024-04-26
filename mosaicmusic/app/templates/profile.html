@@ -37,7 +37,7 @@
           {% endif %}
           
             <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/playlists/{{playlist.playlist_id}}">{{playlist.title}}</a></div>
-            <div class="fw-light"></div>
+            <div class="fw-light">{{playlist.tracks|length}} tracks</div>
           </div>
           {% endfor %}
         </div>

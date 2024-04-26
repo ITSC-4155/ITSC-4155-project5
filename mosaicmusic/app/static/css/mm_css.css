@@ -1,0 +1,18 @@
+.text-gold{
+
+    color: #90742C;
+}
+
+input::placeholder{
+    color:#ffffff;
+    opacity: 1;
+}
+
+.border-gold{
+    border: solid 1px #90742C;
+}
+
+.bg-gold{
+
+    background-color: #90742C;
+}

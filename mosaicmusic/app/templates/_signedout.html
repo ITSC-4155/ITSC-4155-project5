@@ -7,7 +7,7 @@
       {% block styles %}
       {{ bootstrap.load_css() }}
       {% endblock %}
-     
+      <link rel="stylesheet" href="../static/css/mm_css.css">
       <script src="https://kit.fontawesome.com/6079d96043.js" crossorigin="anonymous"></script>
      
       
@@ -15,9 +15,13 @@
       {% endblock %}
     </head>
 <body>
-    <div class="w-100 h-100 bg-dark " > 
+    <div class="w-100 h-100  " style="background: linear-gradient(#2f2a24, #100e0e);"> 
       <div class="vh-100 d-flex flex-row">
-  <div class="col-4 bg-black py-4"><a class="navbar-brand m-4 " href="/"><img src="../static/images/mm_logo_small.png"></img></a></div>
+  <div class="col-4 bg-black py-4" style="background-image:  url(../static/images/splashimage.png); background-size: cover;"><a class="navbar-brand m-4 " href="/"><img aria-label="MosaicMusic Logo" src="../static/images/mm_logo_small.png"></img></a>
+  <div class="text-light fw-bold  w-50 mx-auto" style="font-size: 52px; margin-top: 2em;">Save Your 
+    Favorite Sounds.
+  </div>
+  </div>
         <div class="col-8 text-light h-100 pb-4">
         {% block content %}
         {% endblock content%}

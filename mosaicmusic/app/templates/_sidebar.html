@@ -3,7 +3,7 @@
       
       <ul class="list-unstyled ps-0">
        {% if current_user.is_authenticated %}
-        <li class="mb-1 fs-4 flex-wrap"> Welcome, {{current_user.username}}!</li>
+        <li class="mb-1 fs-4 flex-wrap"> Welcome, <span class="text-gold">{{current_user.username}}</span>!</li>
 
         <li class="mb-1">
           <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
@@ -18,10 +18,10 @@
           </div>
         </li>
         <li class="mb-1">
-          <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+          <button class="fs-4 btn btn-toggle text-light align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
             Playlists 🞛
           </button>
-          <div class="collapse" id="dashboard-collapse">
+          <div class="collapse show" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled  fw-normal pb-1 small px-4">
               {% for playlist in current_user.playlists %}
               <li class=""><a href="/playlists/{{playlist.playlist_id}}" class="link-light rounded">{{playlist.title}}</a></li>
@@ -49,7 +49,7 @@
         </li>
 
         {% else %}
-        <li class="mb-1 fs-5 flex-wrap"> Please <a class="text-warning" href="/login">Log In</a> or <a class="text-warning" href="/register">Register</a> to view</li>
+        <li class="mb-1 fs-5 flex-wrap"> Please <a class="text-gold" href="/login">Log In</a> or <a class="text-gold" href="/register">Register</a> to view</li>
         
         {% endif %}
       </ul>

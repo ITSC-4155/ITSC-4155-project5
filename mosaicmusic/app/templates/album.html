@@ -35,7 +35,13 @@
 
 {% include  "_song2.html"%}
       <div class="row d-flex align-items-center ">
-        <div class="col-1 text-center">{{track.track_position}}</div>
+        <div class="col-1 text-center d-flex flex-row">
+          <div class="px-1">
+            <audio class="rounded-pill mx1" style="width: 50px; background-color: #ecd673" controls>
+              <source src="{{track.preview}}" type="audio/mpeg" />
+            </audio>
+          </div>
+          {{track.track_position}}</div>
         <div class="col-5"><div class="fw-bold">  <!-- Button trigger modal -->
           <a
             type="button"
