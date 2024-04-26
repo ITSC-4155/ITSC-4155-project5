@@ -1,4 +1,7 @@
 from ..models import db, User, Likes
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt()
 
 # Repository for manipulating User data
 
@@ -14,16 +17,27 @@ class UserManager:
         return get_user
     
 
-    def update_user(self, id , email , username, password, profile_picture):
-        update_user = User.query.get(id)
-        update_user.username = username
-        update_user.email = email
-        update_user.password = password
-        if profile_picture != None:
-            update_user.profile_picture = profile_picture
+    def update_user(self, id, email, username, new_password=None, profile_picture=None, about=None):
+        user_to_update = User.query.get(id)
+        if user_to_update is None:
+            return None 
+
+        user_to_update.email = email
+        user_to_update.username = username
+        
+        if new_password is not None:
+            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            user_to_update.password = hashed_password
+
+        if profile_picture is not None:
+            user_to_update.profile_picture = profile_picture
+
+        if about is not None:
+            user_to_update.about = about
 
         db.session.commit()
-        return update_user
+        return user_to_update
+
 
     def delete_user(self, id):
         user_to_delete = User.query.filter_by(id = id).first_or_404()

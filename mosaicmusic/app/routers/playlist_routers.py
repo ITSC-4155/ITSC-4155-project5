@@ -6,7 +6,7 @@ from ..managers.api_manager import api_manager_class
 
 from flask_login import  current_user,logout_user
 from flask import (
-    Blueprint, g, render_template
+    Blueprint, g, render_template, redirect, request
 )
 from ..managers.playlist_manager import playlist_manager_class
 
