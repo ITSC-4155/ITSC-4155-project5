@@ -23,7 +23,7 @@
                 <label for="profile_picture" class="form-label">Profile Picture</label>
                 <input type="file" class="form-control bg-secondary border-black" id="profile_picture" name="profile_picture" accept="image/*">
                 {% if current_user.profile_picture %}
-                    <img src="{{ url_for('static', filename='upload_images/' ~ current_user.profile_picture) }}" class="img-thumbnail mt-2" alt="Current Profile Picture">
+                    <img src="{{ url_for('static', filename='upload_images/' ~ current_user.profile_picture) }}" style="width: 200px; height: 200px;" class="img-thumbnail mt-2" alt="Current Profile Picture">
                 {% endif %}
             </div>
             <button type="submit" class="btn btn-warning rounded-pill m-2">Update Profile</button>
