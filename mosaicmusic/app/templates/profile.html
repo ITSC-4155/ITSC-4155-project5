@@ -13,7 +13,7 @@
         <div class="p-4 d-flex flex-row"> 
             <div class="bg-secondary rounded" style="height: 150px; width: 150px;">
                 {% if user.profile_picture == "" %}
-                <img src="/static/upload_images/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
+                <img src="/static/upload_images/temp/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
                 {% else %}
                 <img src="/static/upload_images/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
                 {% endif %}
@@ -34,7 +34,7 @@
             {% for playlist in user.playlists %}
           <div class="d-flex flex-column p-3">
             {% if playlist.picture == "" %}
-          <img src="/static/upload_images/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
+          <img src="/static/upload_images/temp/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
           {% else %}
           <img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
           {% endif %}

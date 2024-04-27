@@ -53,7 +53,7 @@ def update_user():
         # Choose the directory where you want to save the file
       
         profile_picture_filename = secure_filename(profile_picture.filename)
-        profile_picture.save(os.path.join('app/static', 'upload_images', profile_picture_filename))
+        profile_picture.save(os.path.join('app/static/upload_images', 'profile', profile_picture_filename))
       
     
     # Update User in database

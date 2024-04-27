@@ -9,8 +9,10 @@ __pycache__/
 *.env
 
 
-mosaicmusic/app/static/upload_images/*
-
+mosaicmusic/app/static/upload_images/profile/*
+!mosaicmusic/app/static/upload_images/profile/.gitkeep
+mosaicmusic/app/static/upload_images/playlist/*
+!mosaicmusic/app/static/upload_images/playlist/.gitkeep
 instance/
 
 .pytest_cache/

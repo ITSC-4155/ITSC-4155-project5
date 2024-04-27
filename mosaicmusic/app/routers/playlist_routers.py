@@ -55,7 +55,7 @@ def create_playlist():
         # Choose the directory where you want to save the file
       
         playlist_picture_filename = secure_filename(playlist_picture.filename)
-        playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
+        playlist_picture.save(os.path.join('app/static/upload_images', 'playlist', playlist_picture_filename))
     
     else:
         playlist_picture_filename = "iphone.jpg"
