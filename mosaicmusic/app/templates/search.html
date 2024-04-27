@@ -71,7 +71,7 @@
       {% for track in results[:25] %}
       <div class="col">
         <div class=" h-100">
-        <div class="d-flex mx-auto"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="card-img-top rounded" alt="{{ track.album.title }}">
+        <div class="d-flex mx-auto"><a href="/api/album/{{track.album.id}}"><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" class="card-img-top rounded" alt="{{ track.album.title }}"></a>
           </div>
           <div class="card-body">
             <div class="d-flex flex-row ">

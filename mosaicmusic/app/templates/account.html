@@ -19,6 +19,7 @@
             <input 
             name="email"
             type="text"
+            value="{{current_user.email}}"
             class="form-control bg-secondary border-black "
             id="username"
             placeholder="{{current_user.email}}"
@@ -33,6 +34,7 @@
         type="text"
         class="form-control bg-secondary border-black "
         id="username"
+        value="{{current_user.username}}"
         placeholder="{{current_user.username}}"
         required
     ></input>
@@ -45,6 +47,7 @@
     type="password"
     class="form-control bg-secondary border-black "
     id="password"
+ 
     placeholder="<secret>"
     required
 ></input>
