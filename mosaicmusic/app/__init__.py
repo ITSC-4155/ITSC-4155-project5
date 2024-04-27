@@ -6,7 +6,8 @@ from flask import g
 from .managers.playlist_manager import playlist_manager_class
 
 from .routers import auth_routers, user_routers, profile_routers, search_routers, api_routers, playlist_routers
-
+from flask import Flask
+from flask_bcrypt import Bcrypt
 from .models import db, User
 from flask_login import LoginManager
 
@@ -19,7 +20,7 @@ login_manager = LoginManager()
 # Initializing the app and plugins
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(Config)
-
+bcrypt = Bcrypt(app)
 
 bootstrap = Bootstrap5(app)
 db.init_app(app)

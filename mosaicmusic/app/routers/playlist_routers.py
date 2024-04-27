@@ -113,7 +113,11 @@ def edit_playlist(id):
 
     return redirect(f'/playlists/{id}')
 
-
+@playlist_blueprint.post("/<int:id>/delete")
+def delete_playlist(id):
+    playlist_manager_class.delete_playlist(id)
+    db.session.commit()
+    return redirect(f'/playlists/all')
 
 @playlist_blueprint.post('/<int:id>/add/<int:track_id>')
 def add_track(id, track_id):

@@ -25,6 +25,8 @@
   </div>
     <div> {% if current_user.id == playlist.creator.id %}
       <div class="d-flex w-100 pt-2 px-4"><a href="/playlists/{{playlist.playlist_id}}/edit" class=" text-warning " style="margin-left: auto;"><i class="fa-solid fa-pen-to-square"></i> edit playlist</a></div>
+      
+      <!-- <div class="d-flex w-100 pt-2 px-4"><a href="/playlists/{{playlist.playlist_id}}/delete" class=" text-warning " style="margin-left: auto;"><i class="fa-solid fa-pen-to-square"></i> delete playlist</a></div> -->
       {% else %}
       {%endif %}</div>
     </div>
