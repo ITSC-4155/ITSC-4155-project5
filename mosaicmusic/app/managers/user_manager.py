@@ -25,6 +25,10 @@ class UserManager:
         db.session.commit()
         return update_user
 
+    def get_all_users(self):
+        get_users = User.query.all()
+        return get_users
+
     def delete_user(self, id):
         user_to_delete = User.query.filter_by(id = id).first_or_404()
         db.session.delete(user_to_delete)

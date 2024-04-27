@@ -24,7 +24,9 @@ def home():
 
     albums = client.get_albums_chart(0)
     artists = client.get_artists_chart(0)
-    return render_template('index.html', current_user=current_user, albums=albums, artists=artists)
+    getusers = user_manager_class.get_all_users()
+
+    return render_template('index.html', current_user=current_user, albums=albums, artists=artists, getusers=getusers)
 
 
 ## REGISTER PAGES

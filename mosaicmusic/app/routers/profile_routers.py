@@ -23,3 +23,10 @@ def edit_profile(id):
     fetch_user = user_manager_class.get_user_by_id(id)
     return render_template('account.html', user=fetch_user)
 
+
+@profile_pages.get('/all')
+def all_profiles():
+    getusers = user_manager_class.get_all_users()
+    return render_template('all_users.html', getusers=getusers)
+
+

@@ -1,15 +1,15 @@
 {% extends "_base.html" %} {%block content%}
 
 <div class="d-flex flex-row">
-  <div class="d-flex flex-row vw-100">
+  <div class="d-flex flex-row vw-100 ">
   {%include "_sidebar.html"%}
 
-  <div class="vh-100 w-100">
+  <div class=" w-100">
     <div class="w-100 bg-black">
     <h1 class="fw-bold p-4">Home</h1>
   </div>
 
-  <div class="p-4 ">
+  <div class="p-4  ">
     <div class="m-4 w-100 col">
       <h4 class="p-2 fw-bold">Trending Albums</h4>
       <div class="W-75 d-flex flex-row overflow-x-auto overflow-y-hidden" style="width: 1000px;">
@@ -52,7 +52,28 @@
     </div>
       {%endfor %}
     </div>
+
+
+
+  <div class="m-4 w-100 col">
+   <div class=" d-flex"> <h4 class="p-2 fw-bold">Users</h4> <a href="/profiles/all" class="link-warning">view all</a></div>
+  <div class="d-flex flex-row overflow-x-auto" style="width: 1000px; height: 225px;">
+    <div class="d-flex flex-row">
+      {% for user in getusers[:15] %}
+    <div class="d-flex flex-column p-3">
+      {% if user.profile_picture == "" %}
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+    {% else %}
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+    {% endif %}
+    
+      <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/profiles/{{user.id}}">{{user.username}}</a></div>
+
+    </div>
+    {% endfor %}
   </div>
+</div>
+  </div></div>
   </div>
 </div>
 </div>
