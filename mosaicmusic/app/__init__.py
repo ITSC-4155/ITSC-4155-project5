@@ -11,32 +11,37 @@ from flask_bcrypt import Bcrypt
 from .models import db, User
 from flask_login import LoginManager
 
-
 client = Client()
 login_manager = LoginManager()
 
 
+def create_app():
 
-# Initializing the app and plugins
-app = Flask(__name__, instance_relative_config=True)
-app.config.from_object(Config)
-bcrypt = Bcrypt(app)
+    # Initializing the app and plugins
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object(Config)
+    bcrypt = Bcrypt(app)
+    bootstrap = Bootstrap5(app)
 
-bootstrap = Bootstrap5(app)
-db.init_app(app)
-auth_routers.bcrypt.init_app(app)
-login_manager.init_app(app)
+    register_blueprints(app)
 
   
-login_manager.login_view = 'auth.login'
 
+    db.init_app(app)
+    auth_routers.bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
 
-@app.context_processor
-def inject_user_playlists():
-    if hasattr(g, 'current_user') and g.current_user.is_authenticated:
-        user_playlists = playlist_manager_class.get_playlists_by_user(g.current_user.id)
-        return {'user_playlists': user_playlists}
-    return {'user_playlists': []}
+    @app.context_processor
+    def inject_user_playlists():
+        if hasattr(g, 'current_user') and g.current_user.is_authenticated:
+            user_playlists = playlist_manager_class.get_playlists_by_user(g.current_user.id)
+            return {'user_playlists': user_playlists}
+        return {'user_playlists': []}
+   
+       
+    
+    return app
 
 
 @login_manager.user_loader
@@ -45,9 +50,12 @@ def load_user(id):
     return User.query.get(id) 
 
 
-app.register_blueprint(auth_routers.auth_pages)
-app.register_blueprint(user_routers.user_pages)
-app.register_blueprint(profile_routers.profile_pages)
-app.register_blueprint(search_routers.search_blueprint)
-app.register_blueprint(api_routers.api_pages)
-app.register_blueprint(playlist_routers.playlist_blueprint)
+
+
+def register_blueprints(app):
+    app.register_blueprint(auth_routers.auth_pages)
+    app.register_blueprint(user_routers.user_pages)
+    app.register_blueprint(profile_routers.profile_pages)
+    app.register_blueprint(search_routers.search_blueprint)
+    app.register_blueprint(api_routers.api_pages)
+    app.register_blueprint(playlist_routers.playlist_blueprint)
