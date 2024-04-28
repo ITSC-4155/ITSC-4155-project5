@@ -55,10 +55,10 @@ def create_playlist():
         # Choose the directory where you want to save the file
       
         playlist_picture_filename = secure_filename(playlist_picture.filename)
-        playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
+        playlist_picture.save(os.path.join('app/static/upload_images', 'playlist', playlist_picture_filename))
     
     else:
-        playlist_picture_filename = "iphone.jpg"
+        playlist_picture_filename = ""
 
     new_playlist = playlist_manager_class.create_playlist(title, descr, playlist_picture_filename, user_id)
     db.session.add(new_playlist)
@@ -102,10 +102,10 @@ def edit_playlist(id):
         # Choose the directory where you want to save the file
       
         playlist_picture_filename = secure_filename(playlist_picture.filename)
-        playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
+        playlist_picture.save(os.path.join('app/static/upload_images', 'playlist', playlist_picture_filename))
     
     else:
-        playlist_picture_filename = "iphone.jpg"
+        playlist_picture_filename = ""
 
     update_playlist = playlist_manager_class.update_playlist(id, title, descr, playlist_picture_filename)
     db.session.add(update_playlist)
@@ -117,7 +117,7 @@ def edit_playlist(id):
 def delete_playlist(id):
     playlist_manager_class.delete_playlist(id)
     db.session.commit()
-    return redirect(f'/playlists')
+    return redirect(f'/playlists/all')
 
 @playlist_blueprint.post('/<int:id>/add/<int:track_id>')
 def add_track(id, track_id):

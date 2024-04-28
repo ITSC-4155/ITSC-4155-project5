@@ -11,9 +11,9 @@
   {% for playlist in playlists %}
   <div class="d-flex flex-column p-3 ">
     {% if playlist.picture == "" %}
-  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/temp/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
   {% else %}
-  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+  <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/playlist/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
   {% endif %}
   
     <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/playlists/{{playlist.playlist_id}}">{{playlist.title}}</a></div>

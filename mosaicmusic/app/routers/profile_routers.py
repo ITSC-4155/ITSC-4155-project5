@@ -30,6 +30,13 @@ def show_edit_profile(id):
     user_to_edit = user_manager_class.get_user_by_id(id)
     return render_template('edit_profile.html', user=user_to_edit)
 
+
+@profile_pages.get('/all')
+def all_profiles():
+    getusers = user_manager_class.get_all_users()
+    return render_template('all_users.html', getusers=getusers)
+
+
 # Route to process the edit profile form submission
 @profile_pages.route('/<int:id>/edit', methods=['POST'])
 @login_required

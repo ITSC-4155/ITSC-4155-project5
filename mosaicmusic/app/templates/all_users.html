@@ -1,0 +1,27 @@
+{% extends "_base.html" %} {%block content%}
+<div class="d-flex flex-row">
+    <div class="d-flex flex-row vw-100 vh-100">
+    {%include "_sidebar.html"%}
+    <div class="w-100 ">
+        
+        <div class="p-4 bg-black"><h2 class="fw-bold">  All Users </h2>
+        <p class="fw-light mx-5">List of all the users</p></div>
+       
+<div class="m-4 py-2 d-flex">
+  {% for user in getusers %}
+  <div class="d-flex flex-column p-3">
+    {% if user.profile_picture == "" %}
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/temp/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+    {% else %}
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/profile/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+  {% endif %}
+  
+    <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/profiles/{{user.id}}">{{user.username}}</a></div>
+
+  </div>
+  {% endfor %}
+</div>
+  
+  <!-- <p><a class="btn btn-primary" href="/playlists/add">Add a playlist</a></p> -->    </div></div></div>
+
+{%endblock content%}
