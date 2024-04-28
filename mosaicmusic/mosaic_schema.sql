@@ -104,31 +104,3 @@ FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
 );
 
 
-
-
--- CREATE TABLE IS NOT EXISTS albums_tracklist(
--- album_id INT NOT NULL,
--- track_id INT NOT NULL,
--- PRIMARY KEY(track_id, album)
--- FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE,
--- FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
--- );
-
-
-
--- CREATE TABLE IF NOT EXISTS followers
---   (id INT NOT NULL, CONSTRAINT followers_pkey PRIMARY KEY(id));
-
--- CREATE TABLE IF NOT EXISTS genres(
---   genre_id SERIAL NOT NULL,
---   genre_name VARCHAR(30) NOT NULL,
---   album_id INT NULL,
---   PRIMARY KEY(genre_id)
---   FOREIGN KEY(album_id) REFERENCES albums(album_id) ON DELETE CASCADE
--- );
-
--- CREATE TABLE public.profilefavs(
---     id serial NOT NULL, CONSTRAINT profilefavs_pkey PRIMARY KEY(id)
-    
---     );
-
