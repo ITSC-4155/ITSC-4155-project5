@@ -18,16 +18,19 @@ login_manager = LoginManager()
 def create_app():
 
     # Initializing the app and plugins
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__)
+
+    
     app.config.from_object(Config)
     bcrypt = Bcrypt(app)
     bootstrap = Bootstrap5(app)
 
-    register_blueprints(app)
 
-  
 
     db.init_app(app)
+    register_blueprints(app)
+
+
     auth_routers.bcrypt.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
