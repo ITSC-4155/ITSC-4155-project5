@@ -58,7 +58,7 @@ def create_playlist():
         playlist_picture.save(os.path.join('app/static/upload_images', 'playlist', playlist_picture_filename))
     
     else:
-        playlist_picture_filename = "iphone.jpg"
+        playlist_picture_filename = ""
 
     new_playlist = playlist_manager_class.create_playlist(title, descr, playlist_picture_filename, user_id)
     db.session.add(new_playlist)
