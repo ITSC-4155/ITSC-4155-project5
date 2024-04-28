@@ -22,8 +22,8 @@ def create_app():
 
     
     app.config.from_object(Config)
-    bcrypt = Bcrypt(app)
-    bootstrap = Bootstrap5(app)
+    Bcrypt(app)
+    Bootstrap5(app)
 
 
 
@@ -53,7 +53,7 @@ def load_user(id):
     return User.query.get(id) 
 
 
-
+    
 
 def register_blueprints(app):
     app.register_blueprint(auth_routers.auth_pages)
