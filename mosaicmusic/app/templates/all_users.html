@@ -11,9 +11,9 @@
   {% for user in getusers %}
   <div class="d-flex flex-column p-3">
     {% if user.profile_picture == "" %}
-    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/temp/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
     {% else %}
-    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
+    <a href="/profiles/{{user.id}}"><img src="/static/upload_images/profile/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
   {% endif %}
   
     <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/profiles/{{user.id}}">{{user.username}}</a></div>

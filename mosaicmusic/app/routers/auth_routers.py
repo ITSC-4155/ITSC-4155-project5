@@ -21,6 +21,9 @@ auth_pages = Blueprint('auth', __name__, template_folder="templates", url_prefix
 # HOME PAGE ACCESS
 @auth_pages.route('/')
 def home():
+    if not current_user.is_authenticated:
+        # Redirect to login or handle it appropriately if user is not authenticated
+        return redirect("/login")  # Example redirection to a login page
 
     albums = client.get_albums_chart(0)
     artists = client.get_artists_chart(0)

@@ -10,15 +10,15 @@
         <div class="d-flex flex-row">
       
           {% if playlist.picture == "" %}
-          <img src="/static/upload_images/iphone.jpg" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
+          <img src="/static/upload_images/temp/iphone.jpg" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
           {% else %}
-          <img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
+          <img src="/static/upload_images/playlist/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
           {% endif %}
           
       <div class="d-flex flex-column p-3">
         <div class="text-tertiary fw-light text-uppercase"></div>
         <h1 class="fw-bold">{{playlist.title}}</h1>
-      <div class="fw-bold">by <a href="/profiles/{{playlist.creator.id}}"> {{playlist.creator.username}}</a> | {{playlist.tracks | count}} Tracks </div>
+      <div class="fw-bold">by <a class="link-warning" href="/profiles/{{playlist.creator.id}}"> {{playlist.creator.username}}</a> | {{playlist.tracks | count}} Tracks </div>
     <div><p class="fw-light">{{playlist.descr}}</p></div>
     
     </div>
@@ -45,7 +45,7 @@
 
     <!-- loop to show each track -->
 {% for track in playlist.tracks %}
-
+{% include  "_song.html"%}
       <div class="row d-flex align-items-center ">
         <div class="col-1 d-flex flex-row">
           <div class="px-1"> 
@@ -57,7 +57,15 @@
           </audio> </div>
           <div>{{loop.index}}</div>
           </div>
-        <div class="col-4 d-flex flex-row"><div class="px-4 "><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 50px; width: 50px;"/></div><div><div class="fw-bold">{{track.title}}
+        <div class="col-4 d-flex flex-row"><div class="px-4 "><img src="https://e-cdn-images.dzcdn.net/images/cover/{{track.md5_image}}/500x500-000000-80-0-0.jpg" style="height: 50px; width: 50px;"/></div><div>
+          <div class="fw-bold"> <a
+            type="button"
+            onclick="getJSON{{loop.index}}()"
+            class="link-light link-opacity-50-hover"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+           {{track.title}}</a>
           {% if track.is_explicit == True %}
           <p class="badge m-0 text-danger">E</p> 
          {% endif %}
@@ -67,9 +75,7 @@
          </div></div>
         </div>
         <div class="col-3">
-          <div class="flex flex-row mx-0">{{track.album.title}}
-           
-          </div>
+          <div class="flex flex-row mx-0"><a href="/api/album/{{track.album.album_id}}" class="link-opacity-50-hover link-light text-decoration-none ">{{track.album.title}}</a></div>
       </div>
         <div class="col-2 justify-items-center">
           <div class="d-flex flex-row ">
@@ -131,7 +137,7 @@
     </div>
         <hr class="w-100 mx-auto my-2">
       </div>
-
+      {% include "_songdetails.html" %}
       {% endfor %}
     </div>
 </div>

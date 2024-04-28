@@ -15,7 +15,7 @@
                 {% if user.profile_picture == "" %}
                 <img src="/static/upload_images/temp/blank-profile-picture.png" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
                 {% else %}
-                <img src="/static/upload_images/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
+                <img src="/static/upload_images/profile/{{user.profile_picture}}" class="rounded bg-secondary border" style="height: 150px; width: 150px;"/>
                 {% endif %}
                 
             </div>
@@ -33,10 +33,10 @@
         <div class="d-flex flex-row">
             {% for playlist in user.playlists %}
           <div class="d-flex flex-column p-3">
-            {% if playlist.picture == "" %}
-          <img src="/static/upload_images/temp/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
+            {% if playlist.picture == '' %}
+            <a href="/playlists/{{playlist.playlist_id}}"><img src="/static/upload_images/temp/iphone.jpg" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
           {% else %}
-          <img src="/static/upload_images/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/>
+         <a href="/playlists/{{playlist.playlist_id}}"> <img src="/static/upload_images/playlist/{{playlist.picture}}" class="rounded bg-secondary border" style="height: 120px; width: 120px;"/></a>
           {% endif %}
           
             <div class="fw-bold pt-1 flex-wrap" style="width: 120px;"><a class="link-light link-opacity-50-hover text-decoration-none " href="/playlists/{{playlist.playlist_id}}">{{playlist.title}}</a></div>

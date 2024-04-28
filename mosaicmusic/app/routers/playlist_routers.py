@@ -102,10 +102,10 @@ def edit_playlist(id):
         # Choose the directory where you want to save the file
       
         playlist_picture_filename = secure_filename(playlist_picture.filename)
-        playlist_picture.save(os.path.join('app/static', 'upload_images', playlist_picture_filename))
+        playlist_picture.save(os.path.join('app/static/upload_images', 'playlist', playlist_picture_filename))
     
     else:
-        playlist_picture_filename = "iphone.jpg"
+        playlist_picture_filename = ""
 
     update_playlist = playlist_manager_class.update_playlist(id, title, descr, playlist_picture_filename)
     db.session.add(update_playlist)
