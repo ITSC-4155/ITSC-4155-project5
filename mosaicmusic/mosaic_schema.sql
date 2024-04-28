@@ -103,4 +103,3 @@ FOREIGN KEY(playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
 FOREIGN KEY(track_id) REFERENCES tracks(track_id) ON DELETE CASCADE
 );
 
-
