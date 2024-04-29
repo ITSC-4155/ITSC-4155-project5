@@ -26,7 +26,6 @@
     <div> {% if current_user.id == playlist.creator.id %}
       <div class="d-flex w-100 pt-2 px-4"><a href="/playlists/{{playlist.playlist_id}}/edit" class=" text-warning " style="margin-left: auto;"><i class="fa-solid fa-pen-to-square"></i> edit playlist</a></div>
       
-      <!-- <div class="d-flex w-100 pt-2 px-4"><a href="/playlists/{{playlist.playlist_id}}/delete" class=" text-warning " style="margin-left: auto;"><i class="fa-solid fa-pen-to-square"></i> delete playlist</a></div> -->
       {% else %}
       {%endif %}</div>
     </div>
@@ -126,6 +125,7 @@
 
       
       <div class="col-1">
+       {% if current_user.id == playlist.creator.id %}
         <div class="flex flex-row mx-5">
           <form method="post"
           action="/playlists/{{playlist.playlist_id}}/remove/{{track.track_id}}">
@@ -134,7 +134,11 @@
           class="btn text-danger"><i class="fa-solid fa-trash"></i></button>
         </form>
         </div>
+
+        {% else %}
+        {% endif %}
     </div>
+ 
         <hr class="w-100 mx-auto my-2">
       </div>
       {% include "_songdetails.html" %}

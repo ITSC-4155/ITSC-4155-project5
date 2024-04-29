@@ -66,7 +66,7 @@ def edit_profile(id):
     profile_picture_filename = None
     if profile_picture and allowed_file(profile_picture.filename):
         filename = secure_filename(profile_picture.filename)
-        filepath = os.path.join('app/static/upload_images', filename)
+        filepath = os.path.join('app/static/upload_images/profile', filename)
         profile_picture.save(filepath)
         profile_picture_filename = filename  
 
