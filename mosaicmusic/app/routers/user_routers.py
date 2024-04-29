@@ -102,19 +102,20 @@ def trackdetails(id):
 def recspage():
 
 
- 
+    
     likes = likes_manager_class.get_likes_by_id(current_user.id)
     mylikes = likes.tracks
     if len(mylikes) != 0:
         randomthree = []
-        
+
+        # pick random 3 artist from likes
         for i in range(3):
             randartist = random.choice(mylikes).artist.artist_id
             if randartist not in randomthree:
                 
                 randomthree.append(randartist)
 
-        
+        # display related artist of those 3 
         relatedartists = []
         for n in randomthree:
             artist = client.get_artist(n)
@@ -122,6 +123,7 @@ def recspage():
             relatedartists.append(artist.get_related()[:6])
         relatedartists
 
+        # Display related tracks of artists
         relatedtracks = []
         for artists in relatedartists:
             for ar in artists:

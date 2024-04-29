@@ -11,8 +11,13 @@ __pycache__/
 
 mosaicmusic/app/static/upload_images/profile/*
 !mosaicmusic/app/static/upload_images/profile/.gitkeep
+!mosaicmusic/app/static/upload_images/profile/0_GettyImages-636731569.png
+!mosaicmusic/app/static/upload_images/profile/bestuser.jpg
 mosaicmusic/app/static/upload_images/playlist/*
 !mosaicmusic/app/static/upload_images/playlist/.gitkeep
+!mosaicmusic/app/static/upload_images/playlist/bird-domesticated-goose-pennsylvania-william-d-prystauk.jpg
+!mosaicmusic/app/static/upload_images/playlist/44341b1a544877a952a5f1cabc22d115.jpg
+!mosaicmusic/app/static/upload_images/playlist/dancing-girl-colorful-spots-splashes-600nw-71476468.png
 instance/
 
 .pytest_cache/

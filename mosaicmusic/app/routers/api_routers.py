@@ -130,6 +130,8 @@ def likeTrack(track_id):
 
     return redirect(f'/api/album/{track.album.id}')
 
+
+# Unlike song
 @api_pages.post('/track/<int:track_id>/unlike/')
 def unlikeTrack(track_id):
 
