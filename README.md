@@ -25,3 +25,8 @@ Mosaic Music is A beta music-based social application oriented around Users who 
 
 
 # [DEMONSTRATION VIDEO](https://drive.google.com/file/d/1ZWmh6B0bx4pjwfdL8kMhY4asbDbSCyK8/view?usp=sharing)
+
+
+Instructions for installation in build.md
+
+
