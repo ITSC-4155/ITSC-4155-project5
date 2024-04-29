@@ -67,10 +67,6 @@
 {% block content %}
   <div class="container mt-4">
 
-    {%if results is '' %}
-    <h2 class="text-center mb-4 fw-bold">Results</h2>
-    {% else %}
-
     
     <h2 class="text-center mb-4 fw-bold">Top track results for "{{ query }}"</h2>
     <div class="row g-4 row-cols-custom-5 p-4">
@@ -104,6 +100,6 @@
       <p>No results found.</p>
       {% endfor %}
     </div>
-    {% endif %}
+ 
   </div>
 {% endblock content %}
