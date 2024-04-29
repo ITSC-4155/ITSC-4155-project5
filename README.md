@@ -1,5 +1,6 @@
 # ITSC-4155-project8 - (Mosaic Music)
-Mosaic Music is A beta music-based social application oriented around Users who are enthusiastic about Categorizing and sharing songs with others.
+Mosaic Music is A beta music-based social application oriented around Users who are enthusiastic about Categorizing and sharing songs with others. It utilizes the Deezer API to fetch music data for users to search for songs to like and add to their playlists, as well as to their recommended pages.
+
 - Like, Listen to, and Search for songs, artists, and albums using the Deezer API
 - Create an account, edit your account information, and upload a profile picture
 - Create a playlist, as well as add songs to the playlist
