@@ -11,7 +11,6 @@ search_blueprint = Blueprint('search', __name__, url_prefix='/search')
 def search():
     query = request.args.get('query', '')
 
-    
 
     if query != '':
         results = deezer_client.search(query) 

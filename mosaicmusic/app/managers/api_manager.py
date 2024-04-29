@@ -1,5 +1,8 @@
 from ..models import db,  Track, Album, Artist
 
+# Database functions for API music data
+
+
 class ApiManager:
     def add_track(self, track_id, title, duration, is_explicit, audio_preview,\
       release_date, md5_image, track_position,artist_id, album_id):

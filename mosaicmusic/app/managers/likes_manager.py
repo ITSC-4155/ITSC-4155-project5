@@ -1,5 +1,6 @@
 from ..models import db, User, Likes, Track
 
+# Database functions for Liking Songs
 
 class LikesManager:
     def create_user_likes(self, likes_id, id):
