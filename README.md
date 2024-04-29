@@ -5,7 +5,7 @@ Mosaic Music is A beta music-based social application oriented around Users who 
 - Create a playlist, as well as add songs to the playlist
 - Like songs, and have Artists and songs recommended to you based on those likes in the recommended page
 - View other user profiles on the site 
-
+- 
 
 ### Group 4 
 &nbsp;&nbsp;&nbsp;&nbsp;**Scrum Master**
